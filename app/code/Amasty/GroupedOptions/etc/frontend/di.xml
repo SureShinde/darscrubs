@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Amasty\Shopby\Block\Navigation\State\Swatch">
+        <plugin name="Amasty_GroupedOptions::add_grouped_swatches" type="Amasty\GroupedOptions\Plugin\Shopby\Block\Navigation\State\AddGroupedSwatches" />
+    </type>
+
+    <type name="Amasty\Shopby\Helper\Content">
+        <plugin name="Amasty_GroupedOptions::AddGroupOptionData"
+                type="Amasty\GroupedOptions\Plugin\Shopby\Helper\Content\AddGroupOptionData"/>
+    </type>
+
+    <type name="Amasty\Shopby\Block\Navigation\SwatchesChoose">
+        <plugin name="Amasty_GroupedOptions::ValidateGroupOptions"
+                type="Amasty\GroupedOptions\Plugin\Shopby\Block\Navigation\SwatchesChoose\ValidateGroupOptions"/>
+    </type>
+
+    <type name="Magento\CatalogSearch\Model\Layer\Filter\Price">
+        <plugin name="Amasty_GroupedOptions::ChangePriceLabels" type="Amasty\GroupedOptions\Plugin\CatalogSearch\Model\Layer\Filter\Price\ChangeLabel" />
+    </type>
+
+    <type name="Magento\CatalogSearch\Model\Layer\Filter\Decimal">
+        <plugin name="Amasty_GroupedOptions::ChangeDecimalLabels" type="Amasty\GroupedOptions\Plugin\CatalogSearch\Model\Layer\Filter\Decimal\ChangeLabel" />
+    </type>
+
+    <type name="Magento\Catalog\Model\Layer\State">
+        <plugin name="Amasty_GroupedOptions::ChangeDecimalLabelsState" type="Amasty\GroupedOptions\Plugin\Catalog\Model\Layer\State\ChangeFilterLabel" />
+    </type>
+</config>

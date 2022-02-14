@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright: Copyright © 2019 Firebear Studio. All rights reserved.
+ * @author   : Firebear Studio <fbeardev@gmail.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Firebear_ImportExport:etc/format_files.xsd">
+    <fileFormat name="darscrubs_order" direction="export" label="Darscrubs Order" model="Firebear\Darscrubs\Model\Export\Order\Adapter" />
+</config>

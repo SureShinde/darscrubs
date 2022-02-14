@@ -1,0 +1,30 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <system>
+
+        <tab id="zohosalesiq" translate="label" sortOrder="50">
+            <label>Zoho SalesIQ</label>
+            <class>zohosalesiq</class>
+        </tab>
+
+        <section id="widget_config" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="0">
+            <label>SalesIQ</label>
+            <tab>zohosalesiq</tab>
+            <resource>Zoho_Salesiq::salesiq</resource>
+
+            <group id="option_group" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Zoho SalesIQ widget options</label>
+
+                <field id="isallowed" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Widget status</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="salesiqscript" translate="label" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Have your SalesIQ code snippet pasted right here. </label>
+                    <comment><![CDATA[ <div style="width: 120%;"><b><br/>How to get SalesIQ code snippet for Magento?</b><br/><br/> * Log-in to your Zoho SalesIQ account.  (Are you a new user? If so, <a href="http://google.com">Sign Up</a>)<br/> * Go to Settings->Websites and click on the Website's name.<br/> * Choose the Live Chat platform to engage with visitors, copy the code and past it here.<br/> And, you're finally done adding SalesIQ to Magento.<br/> Oh! And you can also refer our <a href="https://www.zoho.com/salesiq/help/integrations/live-chat-plugin-for-magento.html">User guides</a> for more information.<br/></div>]]></comment>
+                </field>
+                
+            </group>
+        </section>
+    </system>
+</config>

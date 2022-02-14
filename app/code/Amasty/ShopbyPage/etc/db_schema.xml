@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="amasty_amshopby_page" resource="default" engine="innodb" comment="Amasty ShopBy Page Table">
+        <column xsi:type="smallint" name="page_id" padding="6" unsigned="false" nullable="false" identity="true"
+                comment="Page ID"/>
+        <column xsi:type="varchar" name="position" nullable="false" length="255" default="replace" comment="Position"/>
+        <column xsi:type="varchar" name="url" nullable="true" length="255" comment="Url"/>
+        <column xsi:type="varchar" name="title" nullable="true" length="255" comment="Title"/>
+        <column xsi:type="text" name="description" nullable="true" comment="description"/>
+        <column xsi:type="varchar" name="meta_title" nullable="true" length="255" comment="Meta Title"/>
+        <column xsi:type="text" name="meta_keywords" nullable="true" comment="Page Meta Keywords"/>
+        <column xsi:type="text" name="meta_description" nullable="true" comment="Page Meta Description"/>
+        <column xsi:type="mediumtext" name="conditions" nullable="true" comment="Conditions"/>
+        <column xsi:type="varchar" name="categories" nullable="true" length="255" comment="Categories"/>
+        <column xsi:type="smallint" name="top_block_id" padding="6" unsigned="false" nullable="true" identity="false"
+                comment="Top Block ID"/>
+        <column xsi:type="smallint" name="bottom_block_id" padding="6" unsigned="false" nullable="true" identity="false"
+                comment="Bottom Block ID"/>
+        <column xsi:type="varchar" name="image" nullable="true" length="255" comment="Image"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="page_id"/>
+        </constraint>
+        <index referenceId="FTI_5840F5E996115BB213F982491FDCE6B6" indexType="fulltext">
+            <column name="title"/>
+            <column name="description"/>
+            <column name="meta_title"/>
+            <column name="meta_keywords"/>
+            <column name="meta_description"/>
+        </index>
+    </table>
+    <table name="amasty_amshopby_page_store" resource="default" engine="innodb"
+           comment="Amasty ShopBy Page To Store Linkage Table">
+        <column xsi:type="smallint" name="page_id" padding="6" unsigned="false" nullable="false" identity="false"
+                comment="Page ID"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="false" identity="false"
+                comment="Store ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="page_id"/>
+            <column name="store_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_B01A91B23706AC2EC93A0115CD289CBD"
+                    table="amasty_amshopby_page_store" column="page_id" referenceTable="amasty_amshopby_page"
+                    referenceColumn="page_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="AMASTY_AMSHOPBY_PAGE_STORE_STORE_ID_STORE_STORE_ID"
+                    table="amasty_amshopby_page_store" column="store_id" referenceTable="store"
+                    referenceColumn="store_id" onDelete="CASCADE"/>
+        <index referenceId="AMASTY_AMSHOPBY_PAGE_STORE_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+    </table>
+</schema>

@@ -1,0 +1,151 @@
+<?php
+/** @var \Amasty\ShopbyBrand\Block\Widget\BrandList $block */
+/** @var \Magento\Framework\Escaper $escaper */
+
+$brandItemPadding = 20;
+$brandItemBorder = 2;
+$items = $block->getIndex();
+$columns = abs((int)$block->getData('columns'));
+$brandLetters = $block->getAllLetters();
+$isShowCount = $block->isShowCount();
+$isShowLogos = $block->isShowBrandLogo();
+$imgWidth = $block->getImageWidth();
+$imgHeight = $block->getImageHeight() ? $block->getImageHeight() . 'px' : 'inherit';
+$imgHeightWithOffset = $block->getImageHeight() ? (($block->getImageHeight() + $brandItemPadding) . 'px') : 'inherit';
+$filterDisplayAll = $block->isFilterDisplayAll();
+$display_zero = $block->isDisplayZero();
+$width = floor(100 / $columns);
+$fontSizeMultiplier = 0.65;
+$brandListClass = 'ambrands-widget-' . random_int(1, 1000);
+?>
+
+<div class="ambrands-brandlist-widget <?= /* @noEscape */ $brandListClass ?>">
+    <?php if ($isShowLogos): ?>
+        <style>
+            .<?= /* @noEscape */ $brandListClass ?> .ambrands-letter .ambrands-content .ambrands-image {
+                max-width: <?= $escaper->escapeHtml($imgWidth) ?>px;
+                max-height: <?= $escaper->escapeHtml($imgHeight) ?>;
+            }
+            .<?= /* @noEscape */ $brandListClass ?> .ambrands-brand-item .ambrands-image-block {
+                height: <?= $escaper->escapeHtml($imgHeightWithOffset) ?>;
+            }
+            .<?= /* @noEscape */ $brandListClass ?> .ambrands-brand-item {
+                width: <?= $escaper->escapeHtml($imgWidth + $brandItemPadding + $brandItemBorder) ?>px;
+                min-height: <?= $escaper->escapeHtml($imgWidth + 30) ?>px;
+            }
+            .<?= /* @noEscape */ $brandListClass ?> .ambrands-brand-item .ambrands-empty {
+                width: <?= $escaper->escapeHtml($imgWidth) ?>px;
+                line-height: <?= $escaper->escapeHtml($imgWidth) ?>px;
+                font-size: <?= $escaper->escapeHtml($imgWidth * $fontSizeMultiplier) ?>px;
+            }
+        </style>
+    <?php endif; ?>
+
+    <style>
+        @media (min-width: 768px) {
+            .<?= /* @noEscape */ $brandListClass ?> .ambrands-letters-list .ambrands-letter {
+                width:<?= $escaper->escapeHtml($width) ?>%;
+            }
+        }
+    </style>
+
+    <div class="content">
+    <?php if ($items): ?>
+        <?php $isShowSearch = $block->isShowSearch() ?>
+        <?php $isShowFilter = $block->isShowFilter() ?>
+
+        <?php if ($isShowSearch || $isShowFilter): ?>
+        <div class="ambrands-filters-block">
+                <?= $block->getSearchHtml() ?>
+                <?php if ($isShowFilter): ?>
+                    <div class="ambrands-letters-filter">
+                        <button class="ambrands-letter -letter-all -active"
+                                data-ambrands-js="filter-letter"
+                                title="<?= $escaper->escapeHtmlAttr(__('All Brands')) ?>">
+                            <?= $escaper->escapeHtml(__('All Brands')) ?>
+                        </button>
+                        <?php if ($filterDisplayAll): ?>
+                            <?php foreach (array_merge(range('A', 'Z'), ['#']) as $letter): ?>
+                                <button data-ambrands-js="filter-letter"
+                                        class="ambrands-letter <?= (!(in_array($letter, $brandLetters)))
+                                            ? '-disabled'
+                                            : 'letter-' . $escaper->escapeHtmlAttr($letter) ?>">
+                                    <?= $escaper->escapeHtml($letter) ?>
+                                </button>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <?php foreach ($brandLetters as $letter): ?>
+                                <button data-ambrands-js="filter-letter"
+                                        class="ambrands-letter letter-<?= $escaper->escapeHtmlAttr($letter) ?>">
+                                    <?= $escaper->escapeHtml($letter) ?>
+                                </button>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
+
+        <?php foreach ($items as $letters): ?>
+        <section class="ambrands-letters-list">
+            <?php foreach ($letters as $letter => $options): ?>
+                <div class="ambrands-letter letter-<?= $escaper->escapeHtml($letter) ?>"
+                    data-ambrands-js="brand-letter">
+                    <h3 class="ambrands-title"><?= $escaper->escapeHtml($letter) ?></h3>
+                    <ul class="ambrands-content">
+                        <?php foreach ($options as $option): ?>
+                            <li class="ambrands-brand-item <?= /* @noEscape */ !$isShowLogos ? '-no-logo' : '' ?>"
+                                <?= /** @noEscape */ $block->getTooltipAttribute($option) ?>>
+                                <a href="<?= $escaper->escapeUrl($option['url']) ?>"
+                                   class="ambrands-inner"
+                                   title="<?= $escaper->escapeHtmlAttr($option['label']) ?>">
+                                    <?php if ($isShowLogos): ?>
+                                        <?php if ($option['img']): ?>
+                                            <span class="ambrands-image-block">
+                                                <img class="ambrands-image"
+                                                     src="<?= $escaper->escapeUrl($option['img']) ?>"
+                                                     title="<?= $escaper->escapeHtmlAttr($option['alt']) ?>"
+                                                     alt="<?= $escaper->escapeHtmlAttr($option['alt']) ?>" />
+                                            </span>
+                                        <?php else: ?>
+                                            <span class="ambrands-image-block">
+                                                <span class="ambrands-empty"><?= $escaper->escapeHtml($letter) ?></span>
+                                            </span>
+                                        <?php endif ?>
+                                    <?php endif ?>
+                                    <span class="ambrands-label">
+                                        <?= $escaper->escapeHtml($option['label']) ?>
+                                        <?php if ($isShowCount): ?>
+                                            <span class="ambrands-count"><?= $escaper->escapeHtml($option['cnt']) ?></span>
+                                        <?php endif; ?>
+                                    </span>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endforeach; ?>
+        </section>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <?= $escaper->escapeHtml(__('Please select brand attribute in Stores -> Configuration -> Amasty Extensions ->
+        Improved Layered Navigation: Brands.')) ?>
+    <?php endif; ?>
+    </div>
+
+    <script type="text/x-magento-init">
+         {
+         <?php if ($block->isTooltipEnabled()): ?>
+             "[data-amshopby-js='brand-tooltip']": {
+                 "amBrandsTooltipInit": {}
+             },
+         <?php endif ?>
+             "*": {
+                 "amBrandsFilterInit": {
+                    "element": "[data-ambrands-js='filter-letter']",
+                    "target": "[data-ambrands-js='brand-letter']"
+                }
+             }
+         }
+    </script>
+</div>

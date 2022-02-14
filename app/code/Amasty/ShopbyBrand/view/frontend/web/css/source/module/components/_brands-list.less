@@ -1,0 +1,190 @@
+//
+//  Shop by Brand Search
+//  ______________________________________________
+
+//
+//  Imports
+//  ----------------------------------------------
+
+@import '../../module/_mixins';
+
+//
+//  Variables
+//  ----------------------------------------------
+
+@ambrands-item__hover__color: #006bb4;
+@ambrands-item__active__color: rgba(65, 173, 255, .19);
+@ambrands-item__color: #333;
+@ambrands-item__offset__m: 8px;
+@ambrands-item__offset__l: 10px;
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .ambrands-letters-list .ambrands-letter {
+        & {
+            box-sizing: border-box;
+            margin-bottom: 40px;
+            width: 100%;
+            vertical-align: top;
+        }
+
+        .ambrands-content {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -@ambrands-item__offset__m;
+            padding: 0;
+        }
+
+        .ambrands-title {
+            display: flex;
+            align-items: center;
+            margin: 0 0 20px;
+            color: #333;
+            font-weight: 700;
+            font-style: normal;
+            font-size: 32px;
+            line-height: 1;
+        }
+    }
+
+    .ambrands-letter .ambrands-brand-item {
+        & {
+            position: relative;
+            margin: 0 @ambrands-item__offset__m (@ambrands-item__offset__m * 2);
+            min-width: 100px;
+        }
+
+        &.-no-logo {
+            max-width: ~'calc(50% - (@{ambrands-item__offset__m} * 2))';
+            width: 100%;
+        }
+
+        &.-no-logo .ambrands-label {
+            padding-top: 10px;
+        }
+
+        .ambrands-inner {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: flex-start;
+            overflow: hidden;
+            height: 100%;
+            border: 1px solid transparent;
+            border-radius: 6px;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(74, 83, 94, .03), 0 4px 10px rgba(104, 118, 139, .13);
+            color: @ambrands-item__color;
+        }
+
+        .ambrands-inner:hover,
+        .ambrands-inner:focus {
+            border-color: @ambrands-item__hover__color;
+            text-decoration: none;
+        }
+
+        .ambrands-inner:active {
+            border-color: @ambrands-item__hover__color;
+            background: @ambrands-item__active__color;
+        }
+
+        .ambrands-empty {
+            color: #e2e2e2;
+        }
+
+        .ambrands-count {
+            & {
+                color: #c7c7c7;
+            }
+
+            &:before {
+                content: '(';
+            }
+
+            &:after {
+                content: ')';
+            }
+        }
+
+        .ambrands-label {
+            .ambrands-word-break;
+
+            box-sizing: border-box;
+            margin: auto;
+            padding: 0 10px 10px;
+            width: 100%;
+            font-weight: 600;
+            font-style: normal;
+            font-size: 14px;
+            line-height: 19px;
+        }
+    }
+
+    .ambrands-brand-item .ambrands-image-block {
+        & {
+            display: flex;
+            align-items: center;
+            box-sizing: border-box;
+            padding: 10px;
+        }
+
+        > .ambrands-image {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    }
+
+    .ambrands-letter .ambrands-image {
+        display: block;
+        margin: 0 auto;
+        pointer-events: none;
+    }
+
+    .ambrands-letters-list .ambrands-brand-item {
+        list-style-type: none;
+        text-align: center;
+    }
+}
+
+//
+//  Tablet
+//  --------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .ambrands-letters-list {
+        & {
+            display: flex;
+        }
+
+        .ambrands-letter .ambrands-content {
+            margin: 0 -@ambrands-item__offset__l;
+        }
+
+        .ambrands-brand-item {
+            margin: 0 @ambrands-item__offset__l (@ambrands-item__offset__l * 2);
+        }
+
+        .ambrands-brand-item.-no-logo {
+            max-width: 156px;
+        }
+
+        .ambrands-letter {
+            padding-right: 10px;
+            width: inherit;
+        }
+    }
+}
+
+//
+//  Desktop
+//  ----------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .ambrands-letters-list .ambrands-letter {
+        padding-right: 30px;
+        width: inherit;
+    }
+}

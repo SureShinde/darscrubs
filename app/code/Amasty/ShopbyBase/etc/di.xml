@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Amasty_Shopby:etc/config.xsd">
+    <preference for="Amasty\ShopbyBase\Api\Data\FilterSettingRepositoryInterface"
+                type="Amasty\ShopbyBase\Model\FilterSettingRepository" />
+    <preference for="Amasty\ShopbyBase\Api\Data\OptionSettingRepositoryInterface"
+                type="Amasty\ShopbyBase\Model\OptionSettingRepository" />
+    <preference for="Amasty\ShopbyBase\Api\Data\FilterSettingInterface" type="Amasty\ShopbyBase\Model\FilterSetting" />
+    <preference for="Amasty\ShopbyBase\Api\Data\OptionSettingInterface" type="Amasty\ShopbyBase\Model\OptionSetting" />
+    <preference for="Amasty\ShopbyBase\Api\UrlBuilderInterface" type="Amasty\ShopbyBase\Model\UrlBuilder" />
+
+    <type name="Amasty\ShopbyBase\Model\Di\Wrapper">
+        <arguments>
+            <argument name="name" xsi:type="string">Magento\CatalogPermissions\Model\Permission\Index</argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,38 @@
+<?php
+/** @var \Amasty\ShopbyBrand\Block\Widget\BrandList $block */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+
+<?php if ($block->getData('side')): ?>
+<div class="block block-layered-nav block-layered-nav--no-filters">
+    <div class="block-content toggle-content">
+        <dl>
+            <dt><?= $escaper->escapeHtml(__('Search Brands'))?></dt>
+            <dd>
+<?php endif;?>
+                <div class="ambrands-search-wrapper">
+                    <label for="ambrands-search-input"
+                           class="ambrands-search-block"
+                           data-mage-init='{"amBrandsSearch": {
+                               "brands": <?= /* @noEscape */ $block->getBrands(); ?>
+                           }}'
+                    >
+                        <input type="text"
+                               class="input-text ambrands-input"
+                               data-ambrands-js="input"
+                               id="ambrands-search-input"
+                               placeholder="<?= $escaper->escapeHtmlAttr(__('Search brand here...')) ?>"
+                               value="" />
+                        <button class="ambrands-clear"
+                                data-ambrands-js="clear"
+                                aria-label="<?= $escaper->escapeHtmlAttr(__('Clear')) ?>"
+                                title="<?= $escaper->escapeHtmlAttr(__('Clear')) ?>"></button>
+                        <span class="ambrands-livesearch-block" data-ambrands-js="livesearch"></span>
+                    </label>
+                </div>
+<?php if ($block->getData('side')): ?>
+            </dd>
+        </dl>
+    </div>
+</div>
+<?php endif;?>

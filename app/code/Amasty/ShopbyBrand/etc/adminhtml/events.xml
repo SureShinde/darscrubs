@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="amshopby_option_form_build_after">
+        <observer name="Amasty_ShopbyBrand::AdditionalFormFields"
+                  instance="Amasty\ShopbyBrand\Observer\Admin\OptionFormBuildAfter"/>
+    </event>
+    <event name="amshopby_option_form_featured_fieldset">
+        <observer name="Amasty_ShopbyBrand::RenameFiledset"
+                  instance="Amasty\ShopbyBrand\Observer\Admin\OptionFormFeatured"/>
+    </event>
+    <event name="admin_system_config_changed_section_amshopby_brand">
+        <observer name="Amasty_ShopbyBrand::ChangeConfiguration"
+                  instance="Amasty\ShopbyBrand\Observer\Admin\ConfigChanged"/>
+    </event>
+</config>

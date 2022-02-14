@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Amasty\GroupedOptions\Api\Data\GroupAttrRepositoryInterface"
+                type="Amasty\GroupedOptions\Model\Repository\GroupAttrRepository"/>
+    <preference for="Amasty\GroupedOptions\Api\GroupRepositoryInterface"
+                type="Amasty\GroupedOptions\Model\ResourceModel\GroupRepository" />
+    <preference for="Amasty\GroupedOptions\Model\GroupAttr\DataFactoryProviderInterface"
+                type="Amasty\GroupedOptions\Model\GroupAttr\DataProviderFactory" />
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="amgrouped_group_form_data_source" xsi:type="string">Amasty\GroupedOptions\Model\ResourceModel\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Eav\Model\Entity\Attribute\Frontend\AbstractFrontend">
+        <plugin name="Amasty_GroupedOptions::AddGroupOptions" type="Amasty\GroupedOptions\Plugin\Eav\Model\Entity\Attribute\Frontend\AbstractFrontend\AddGroupOptions" />
+        <plugin name="Amasty_GroupedOptions::RetrieveGroupOptionLabel" type="Amasty\GroupedOptions\Plugin\Eav\Model\Entity\Attribute\Frontend\AbstractFrontend\RetrieveGroupOptionLabel" />
+    </type>
+
+    <type name="Magento\Swatches\Block\LayeredNavigation\RenderLayered">
+        <plugin name="Amasty_GroupedOptions::AddGroupOptionsSwathes" type="Amasty\GroupedOptions\Plugin\Swatches\Block\LayeredNavigation\RenderLayered\AddGroupOptions" />
+    </type>
+
+    <type name="Magento\CatalogSearch\Model\ResourceModel\Fulltext\Collection">
+        <plugin name="Amasty_GroupedOptions::AdjustFacetedDataToGroup" type="Amasty\GroupedOptions\Plugin\CatalogSearch\Model\ResourceModel\Fulltext\Collection\AdjustFacetedDataToGroup" />
+    </type>
+
+    <type name="Amasty\Shopby\Model\ResourceModel\Fulltext\Collection">
+        <plugin name="Amasty_GroupedOptions::AdjustFacetedDataToGroup" type="Amasty\GroupedOptions\Plugin\Shopby\Model\ResourceModel\Fulltext\Collection\AdjustFacetedDataToGroup" />
+    </type>
+
+    <type name="Magento\Framework\Api\Search\SearchInterface">
+        <plugin name="Amasty_GroupedOptions::AdaptQuery" type="Amasty\GroupedOptions\Plugin\Framework\Api\Search\AdaptGroupValue" sortOrder="999" />
+    </type>
+
+    <type name="Magento\Catalog\Model\Indexer\Product\Eav\Action\Full">
+        <plugin name="Amasty_GroupedOptions::EavReindexGroupOption" type="Amasty\GroupedOptions\Plugin\Catalog\Model\Indexer\Product\Eav\Action\Full" />
+    </type>
+    <type name="Magento\Catalog\Model\Indexer\Product\Eav\Action\Row">
+        <plugin name="Amasty_GroupedOptions::EavReindexGroupOption" type="Amasty\GroupedOptions\Plugin\Catalog\Model\Indexer\Product\Eav\Action\Row" />
+    </type>
+    <type name="Magento\Catalog\Model\Indexer\Product\Eav\Action\Rows">
+        <plugin name="Amasty_GroupedOptions::EavReindexGroupOption" type="Amasty\GroupedOptions\Plugin\Catalog\Model\Indexer\Product\Eav\Action\Rows" />
+    </type>
+
+    <type name="Amasty\ElasticSearch\Model\Indexer\Data\Product\ProductDataMapper">
+        <plugin name="Amasty_GroupedOptions::Fulltext_DataProvider" type="Amasty\GroupedOptions\Plugin\AmastyElastic\Model\Indexer\Data\Product\ProductDataMapper" />
+    </type>
+
+    <type name="Magento\CatalogSearch\Model\Indexer\Fulltext\Action\DataProvider">
+        <plugin name="Amasty_GroupedOptions::Fulltext_DataProvider" type="Amasty\GroupedOptions\Plugin\CatalogSearch\Model\Indexer\Fulltext\Action\DataProvider" />
+    </type>
+
+    <type name="Amasty\ShopbySeo\Model\SeoOptions">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="group" xsi:type="object">Amasty\GroupedOptions\Model\SeoOptionsModifier\GroupAliases</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!--Add possibility for apply patches before DS start-->
+    <virtualType name="Magento\Framework\Setup\Patch\DeclarativeSchemaApplyBeforeReader" type="Magento\Framework\Setup\Patch\PatchReader">
+        <arguments>
+            <argument name="type" xsi:type="string">declarativeSchemaApplyBefore</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Amasty\GroupedOptions\Setup\Patch\PatchApplier" type="Magento\Framework\Setup\Patch\PatchApplier">
+        <arguments>
+            <argument name="dataPatchReader" xsi:type="object">Magento\Framework\Setup\Patch\DeclarativeSchemaApplyBeforeReader</argument>
+            <argument name="schemaPatchReader" xsi:type="object">Magento\Framework\Setup\Patch\DeclarativeSchemaApplyBeforeReader</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Amasty\GroupedOptions\Plugin\Setup\Model\DeclarationInstaller\ApplyPatchesBeforeDeclarativeSchema">
+        <arguments>
+            <argument name="patchApplier" xsi:type="object">Amasty\GroupedOptions\Setup\Patch\PatchApplier</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Setup\Model\DeclarationInstaller">
+        <plugin name="Amasty_GroupedOptions::execute-patches-before-schema-apply"
+                type="Amasty\GroupedOptions\Plugin\Setup\Model\DeclarationInstaller\ApplyPatchesBeforeDeclarativeSchema"/>
+    </type>
+    <!--Add possibility for apply patches before DS end-->
+</config>

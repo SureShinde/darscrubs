@@ -1,0 +1,127 @@
+//
+//  Shop by Brand Popup
+//  ______________________________________________
+
+//
+//  Variables
+//  ----------------------------------------------
+
+@ambrands-popup__width: 600px;
+@ambrands-popup__height: 415px;
+@ambrands-popup-filter-letter__size: 40px;
+@ambrands-popup-filter__background: #fbfbfb;
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .ambrands-list-popup,
+    .ambrands-menu-item .ambrands-arrow {
+        display: none;
+    }
+}
+
+//
+//  Desktop
+//  ----------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .ambrands-list-popup {
+        position: absolute;
+        width: @ambrands-popup__width;
+        height: @ambrands-popup__height;
+        border-radius: 3px;
+        background: #fff;
+        box-shadow: 0 2px 7px rgba(131, 136, 141, .13), 0 10px 15px rgba(131, 136, 141, .13);
+        opacity: 0;
+        transition: all .5s ease;
+        pointer-events: none;
+    }
+
+    .ambrands-menu-item:hover .ambrands-list-popup,
+    .ammenu-item:hover .ambrands-list-popup {
+        display: block;
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .ambrands-list-container {
+        display: flex;
+        height: 100%;
+        font-size: 0;
+    }
+
+    .ambrands-list-popup .ambrands-letters-filter {
+        & {
+            @ambrands-popup-filter__width: ~'calc(((@{ambrands-filter-button__size} + 12px) * 4) + (14px * 2))';
+            display: block;
+            overflow: auto;
+            box-sizing: border-box;
+            padding: 20px 14px 0;
+            min-width: @ambrands-popup-filter__width;
+            width: @ambrands-popup-filter__width;
+            height: 100%;
+            background: @ambrands-popup-filter__background;
+            font-size: 0;
+        }
+
+        .ambrands-letter {
+            display: inline-flex;
+            margin: 0 6px 12px;
+        }
+
+        .ambrands-letter.-letter-all {
+            margin-bottom: 30px;
+            width: ~'calc(100% - 12px)';
+        }
+    }
+
+    .ambrands-popup-items {
+        display: inline-block;
+        overflow: auto;
+        box-sizing: border-box;
+        padding: 20px;
+        width: 100%;
+        height: 100%;
+        font-size: 14px;
+    }
+
+    .ambrands-popup-items .ambrands-letters-list {
+        & {
+            width: 100%;
+        }
+
+        .ambrands-letter {
+            margin-bottom: 30px;
+            padding-right: 0;
+        }
+
+        &:last-child .ambrands-letter {
+            margin-bottom: 0;
+        }
+
+        .ambrands-brand-item {
+            min-width: 100px;
+        }
+    }
+
+    .ambrands-popup-items .ambrands-letters-list .ambrands-brand-item {
+        & {
+            min-width: 100px;
+        }
+
+        .ambrands-label {
+            max-width: 130px;
+        }
+
+        &.-no-logo {
+            max-width: 102px;
+        }
+    }
+
+    .ambrands-popup-items .ambrands-letter .ambrands-brand-item .ambrands-empty {
+        font-weight: 400;
+        font-size: @ambrands-popup-filter-letter__size;
+    }
+}

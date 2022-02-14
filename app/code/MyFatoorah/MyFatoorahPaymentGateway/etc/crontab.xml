@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="myfatoorah">
+        <!-- <job name="auto_cancel_order" instance="MyFatoorah\MyFatoorahPaymentGateway\Cron\CancelOrder" method="execute">
+            <schedule>* * * * *</schedule>
+        </job> -->
+        <job name="checkStatusForPendingOrders" instance="MyFatoorah\MyFatoorahPaymentGateway\Cron\CancelOrder" method="checkStatusForPendingOrders">
+            <schedule>*/10 * * * *</schedule>
+        </job>
+        <job name="createNewLogFile" instance="MyFatoorah\MyFatoorahPaymentGateway\Cron\CancelOrder" method="createNewLogFile">
+            <schedule>0 0 * * 0</schedule>
+        </job>
+        
+    </group>
+</config>

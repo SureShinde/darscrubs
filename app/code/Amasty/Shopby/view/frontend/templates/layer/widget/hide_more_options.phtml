@@ -1,0 +1,45 @@
+<?php
+/** @var \Amasty\Shopby\Block\Navigation\Widget\HideMoreOptions $block */
+/** @var \Magento\Framework\Escaper $escaper */
+
+use Amasty\Shopby\Model\Source\DisplayMode;
+
+$dataAmJsAttribute = 'data-am-js=%s';
+$dataTextMore = 'Show (<span class="am-counter" data-am-counter="counter"></span>) more';
+
+if ($block->getIsState()) {
+    $buttonSelector = sprintf($dataAmJsAttribute, 'show-more_button_state');
+    $itemSelector = '[' . sprintf($dataAmJsAttribute, 'shopby-container') . ']';
+    $numberUnfoldedOptions = $block->getUnfoldedOptions();
+    $isModeDropdown = false;
+} else {
+    $filterSetting = $block->getFilterSetting();
+    $isModeDropdown = $filterSetting->getDisplayMode() == DisplayMode::MODE_DROPDOWN;
+    $filterCode = $escaper->escapeHtml($filterSetting->getFilterCode());
+    $buttonSelector = sprintf($dataAmJsAttribute, 'am-filter-items-' . $filterCode . '-show-more');
+    $itemSelector = '.am-filter-items-' . $filterCode;
+    $numberUnfoldedOptions = $filterSetting->getNumberUnfoldedOptions();
+}
+?>
+
+<?php if (!$isModeDropdown): ?>
+    <a class="am-show-more"
+       title="<?= $escaper->escapeHtml(__('Show more')) ?>" <?= $escaper->escapeHtml($buttonSelector) ?>
+       data-text-more="<?= $escaper->escapeHtml(__($dataTextMore)) ?>"
+       data-text-less="<?= $escaper->escapeHtml(__('Less'))?>"
+       data-is-hide="false">
+        <?= $escaper->escapeHtml(__('Less')) ?>
+    </a>
+
+    <script type="text/x-magento-init">
+        {
+            "<?= /* @noEscape */ $itemSelector ?>": {
+                "amShopbyFilterHideMoreOptions": {
+                    "numberUnfoldedOptions": <?= $escaper->escapeHtml($numberUnfoldedOptions) ?>,
+                    "buttonSelector": "[<?= /* @noEscape */ $buttonSelector ?>]",
+                    "isState": "<?= /* @noEscape */ $block->getIsState() ?>"
+                }
+            }
+        }
+    </script>
+<?php endif; ?>

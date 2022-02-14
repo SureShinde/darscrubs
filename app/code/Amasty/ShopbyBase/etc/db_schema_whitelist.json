@@ -1,0 +1,84 @@
+{
+    "amasty_amshopby_filter_setting": {
+        "column": {
+            "setting_id": true,
+            "filter_code": true,
+            "is_multiselect": true,
+            "display_mode": true,
+            "is_seo_significant": true,
+            "slider_step": true,
+            "units_label_use_currency_symbol": true,
+            "units_label": true,
+            "index_mode": true,
+            "follow_mode": true,
+            "hide_one_option": true,
+            "is_collapsed": true,
+            "sort_options_by": true,
+            "show_product_quantities": true,
+            "is_show_search_box": true,
+            "number_unfolded_options": true,
+            "tooltip": true,
+            "is_expanded": true,
+            "is_use_and_logic": true,
+            "add_from_to_widget": true,
+            "visible_in_categories": true,
+            "categories_filter": true,
+            "attributes_filter": true,
+            "attributes_options_filter": true,
+            "block_position": true,
+            "slider_min": true,
+            "slider_max": true,
+            "rel_nofollow": true,
+            "show_icons_on_product": true,
+            "show_featured_only": true,
+            "category_tree_display_mode": true,
+            "position_label": true,
+            "top_position": true,
+            "side_position": true,
+            "attribute_url_alias": true
+        },
+        "index": {
+            "AMASTY_AMSHOPBY_FILTER_SETTING_SHOW_ICONS_ON_PRODUCT": true,
+            "AMASTY_AMSHOPBY_FILTER_SETTING_IS_SEO_SIGNIFICANT": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AMASTY_AMSHOPBY_FILTER_SETTING_FILTER_CODE": true
+        }
+    },
+    "amasty_amshopby_option_setting": {
+        "column": {
+            "option_setting_id": true,
+            "filter_code": true,
+            "value": true,
+            "store_id": true,
+            "url_alias": true,
+            "is_featured": true,
+            "meta_title": true,
+            "meta_description": true,
+            "meta_keywords": true,
+            "title": true,
+            "description": true,
+            "image": true,
+            "top_cms_block_id": true,
+            "bottom_cms_block_id": true,
+            "slider_position": true,
+            "slider_image": true,
+            "short_description": true,
+            "small_image_alt": true,
+            "limit_options_show_search_box": true,
+            "show_featured_only": true,
+            "is_show_in_widget": true
+        },
+        "index": {
+            "AMASTY_AMSHOPBY_OPTION_SETTING_URL_ALIAS": true,
+            "AMASTY_AMSHOPBY_OPTION_SETTING_STORE_ID": true,
+            "AMASTY_AMSHOPBY_OPTION_SETTING_VALUE": true,
+            "AMASTY_AMSHOPBY_OPTION_SETTING_IS_FEATURED": true,
+            "AMASTY_AMSHOPBY_OPTION_SETTING_FILTER_CODE_STORE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

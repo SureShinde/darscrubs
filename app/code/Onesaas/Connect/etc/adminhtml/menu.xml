@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Onesaas. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Backend/etc/menu.xsd">
+    <menu>
+        <add id="Onesaas_Connect::system_onesaas" title="OneSaas" module="Onesaas_Connect" sortOrder="90" parent="Magento_Backend::system" resource="Onesaas_Connect::system_onesaas"/>
+        <add id="Onesaas_Connect::system_integration" title="Integration" module="Onesaas_Connect" sortOrder="10" parent="Onesaas_Connect::system_onesaas" action="onesaas_connect/integration" resource="Onesaas_Connect::integration"/>     
+    </menu>
+</config>

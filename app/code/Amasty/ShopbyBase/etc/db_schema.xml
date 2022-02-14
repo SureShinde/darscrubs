@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="amasty_amshopby_filter_setting" resource="default" engine="innodb"
+           comment="amasty_amshopby_filter_setting">
+        <column xsi:type="smallint" name="setting_id" padding="6" unsigned="false" nullable="false" identity="true"
+                comment="Setting id"/>
+        <column xsi:type="varchar" name="filter_code" nullable="false" length="100" comment="Filter code"/>
+        <column xsi:type="smallint" name="is_multiselect" padding="6" unsigned="false" nullable="false" identity="false"
+                default="0" comment="Is multiselect"/>
+        <column xsi:type="smallint" name="display_mode" padding="6" unsigned="false" nullable="false" identity="false"
+                default="0" comment="Display mode"/>
+        <column xsi:type="smallint" name="is_seo_significant" padding="6" unsigned="false" nullable="false"
+                identity="false" default="0" comment="Is seo significant"/>
+        <column xsi:type="decimal" name="slider_step" scale="4" precision="12" unsigned="false" nullable="false"
+                default="1" comment="Slider Step"/>
+        <column xsi:type="boolean" name="units_label_use_currency_symbol" nullable="false" default="true"
+                comment="is Units label used currency symbol"/>
+        <column xsi:type="varchar" name="units_label" nullable="false" length="255" default="" comment="Units label"/>
+        <column xsi:type="int" name="index_mode" padding="11" unsigned="false" nullable="false" identity="false"
+                default="0" comment="Robots Index Mode"/>
+        <column xsi:type="int" name="follow_mode" padding="11" unsigned="false" nullable="false" identity="false"
+                default="0" comment="Robots Follow Mode"/>
+        <column xsi:type="int" name="hide_one_option" padding="11" unsigned="false" nullable="false" identity="false"
+                default="0" comment="Hide filter when only one option available" disabled="true"/>
+        <column xsi:type="int" name="is_collapsed" padding="11" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Is filter collapsed" disabled="true"/>
+        <column xsi:type="smallint" name="sort_options_by" padding="6" unsigned="false" nullable="false"
+                identity="false" default="0" comment="Sort Options By"/>
+        <column xsi:type="smallint" name="show_product_quantities" padding="6" unsigned="false" nullable="false"
+                identity="false" default="0" comment="Show Product Quantities"/>
+        <column xsi:type="smallint" name="is_show_search_box" padding="6" unsigned="false" nullable="false"
+                identity="false" default="0" comment="Show Search Box"/>
+        <column xsi:type="smallint" name="number_unfolded_options" padding="6" unsigned="false" nullable="false"
+                identity="false" default="0" comment="Number of unfolded options"/>
+        <column xsi:type="text" name="tooltip" nullable="false" comment="Tooltip"/>
+        <column xsi:type="smallint" name="is_expanded" padding="6" unsigned="false" nullable="false" identity="false"
+                default="0" comment="Is filter expanded" onCreate="migrateDataFrom(is_collapsed)"/>
+        <column xsi:type="smallint" name="is_use_and_logic" padding="6" unsigned="false" nullable="false"
+                identity="false" default="0" comment="Is Use And Logic"/>
+        <column xsi:type="boolean" name="add_from_to_widget" nullable="false" comment="Add From To Widget"/>
+        <column xsi:type="varchar" name="visible_in_categories" nullable="false" length="255"
+                default="visible_everywhere" comment="Visible In Categories"/>
+        <column xsi:type="varchar" name="categories_filter" nullable="false" length="255" default=""
+                comment="Categories Filter"/>
+        <column xsi:type="varchar" name="attributes_filter" nullable="false" length="255" default=""
+                comment="Attributes Filter"/>
+        <column xsi:type="varchar" name="attributes_options_filter" nullable="false" length="255" default=""
+                comment="Attributes Options Filter"/>
+        <column xsi:type="smallint" name="block_position" padding="6" unsigned="false" nullable="false" identity="false"
+                default="0" comment="Show in the Block"/>
+        <column xsi:type="decimal" name="slider_min" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Slider Min Value"/>
+        <column xsi:type="decimal" name="slider_max" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Slider Max Value"/>
+        <column xsi:type="smallint" name="rel_nofollow" padding="6" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Add rel=nofollow"/>
+        <column xsi:type="boolean" name="show_icons_on_product" nullable="false"
+                comment="Show options images block on product view page"/>
+        <column xsi:type="smallint" name="category_tree_display_mode" padding="6" unsigned="false" nullable="false"
+                identity="false" default="0" comment="Category Tree Display Mode"/>
+        <column xsi:type="smallint" name="position_label" padding="6" unsigned="false" nullable="false" identity="false"
+                default="0" comment="Position label"/>
+        <column xsi:type="bigint" name="limit_options_show_search_box" padding="20" unsigned="true" nullable="false"
+                identity="false" default="0" comment="Show Search Box When Number Options"/>
+        <column xsi:type="int" name="top_position" padding="11" unsigned="false" nullable="false" identity="false"
+                default="0" comment="Filter top sort order for block_position=Both"/>
+        <column xsi:type="int" name="side_position" padding="11" unsigned="false" nullable="false" identity="false"
+                default="0" comment="Filter side sort order for block_position=Both"/>
+        <column xsi:type="text" name="attribute_url_alias" nullable="false" comment="Attribute URL Alias"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="setting_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="AMASTY_AMSHOPBY_FILTER_SETTING_FILTER_CODE">
+            <column name="filter_code"/>
+        </constraint>
+        <index referenceId="AMASTY_AMSHOPBY_FILTER_SETTING_SHOW_ICONS_ON_PRODUCT" indexType="btree">
+            <column name="show_icons_on_product"/>
+        </index>
+        <index referenceId="AMASTY_AMSHOPBY_FILTER_SETTING_IS_SEO_SIGNIFICANT" indexType="btree">
+            <column name="is_seo_significant"/>
+        </index>
+    </table>
+
+    <table name="amasty_amshopby_option_setting" resource="default" engine="innodb"
+           comment="amasty_amshopby_option_setting">
+        <column xsi:type="smallint" name="option_setting_id" padding="6" unsigned="false" nullable="false"
+                identity="true" comment="Option setting id"/>
+        <column xsi:type="varchar" name="filter_code" nullable="false" length="255" comment="Filter_code"/>
+        <column xsi:type="int" name="value" padding="11" unsigned="false" nullable="false" identity="false"
+                comment="Attribute Option ID"/>
+        <column xsi:type="int" name="store_id" padding="11" unsigned="false" nullable="false" identity="false"
+                default="0" comment="Store id"/>
+        <column xsi:type="varchar" name="url_alias" nullable="false" length="255" comment="Url alias"/>
+        <column xsi:type="smallint" name="is_featured" padding="6" unsigned="false" nullable="false" identity="false"
+                default="0" comment="Is featured"/>
+        <column xsi:type="text" name="meta_title" nullable="false" comment="Meta title"/>
+        <column xsi:type="text" name="meta_description" nullable="true" comment="Meta description"/>
+        <column xsi:type="text" name="meta_keywords" nullable="true" comment="Meta keywords"/>
+        <column xsi:type="text" name="title" nullable="false" comment="Title"/>
+        <column xsi:type="text" name="description" nullable="true" comment="Description"/>
+        <column xsi:type="varchar" name="image" nullable="true" length="255" comment="Image"/>
+        <column xsi:type="smallint" name="top_cms_block_id" padding="6" unsigned="false" nullable="true" identity="false"
+                comment="Top cms block id"/>
+        <column xsi:type="smallint" name="bottom_cms_block_id" padding="6" unsigned="false" nullable="true" identity="false"
+                comment="Bottom cms block id"/>
+        <column xsi:type="int" name="slider_position" padding="11" unsigned="false" nullable="false" identity="false"
+                default="0" comment="Slider Position"/>
+        <column xsi:type="varchar" name="slider_image" nullable="true" length="255" comment="Slider Image"/>
+        <column xsi:type="text" name="short_description" nullable="false"
+                comment="Short description for product page or tooltip"/>
+        <column xsi:type="varchar" name="small_image_alt" nullable="false" length="255" default="" comment="Image alt"/>
+        <column xsi:type="boolean" name="is_show_in_widget" nullable="false" default="true"
+                comment="Is show in widget"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="option_setting_id"/>
+        </constraint>
+        <index referenceId="AMASTY_AMSHOPBY_OPTION_SETTING_URL_ALIAS" indexType="btree">
+            <column name="url_alias"/>
+        </index>
+        <index referenceId="AMASTY_AMSHOPBY_OPTION_SETTING_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+        <index referenceId="AMASTY_AMSHOPBY_OPTION_SETTING_VALUE" indexType="btree">
+            <column name="value"/>
+        </index>
+        <index referenceId="AMASTY_AMSHOPBY_OPTION_SETTING_IS_FEATURED" indexType="btree">
+            <column name="is_featured"/>
+        </index>
+        <index referenceId="AMASTY_AMSHOPBY_OPTION_SETTING_FILTER_CODE_STORE_ID" indexType="btree">
+            <column name="filter_code"/>
+            <column name="store_id"/>
+        </index>
+    </table>
+</schema>

@@ -1,0 +1,158 @@
+<?php
+/** @var Amasty\ShopbyBrand\Block\Widget\BrandSlider $block */
+/** @var \Magento\Framework\Escaper $escaper */
+
+use Amasty\ShopbyBrand\Block\Widget\BrandSlider;
+
+$items = $block->getItems();
+$isSliderEnable = $block->isSliderEnabled();
+$swiperPrefix = $isSliderEnable ? 'swiper-' : '';
+$itemsPerView = (int)$block->getData('items_number') ?: BrandSlider::DEFAULT_ITEM_NUMBER;
+$imgWidth = (int)$block->getData('image_width') ?: BrandSlider::DEFAULT_IMG_WIDTH;
+$imgHeight = (int)$block->getData('image_height');
+$sliderWidth = (int)$block->getData('slider_width') ?: ($imgWidth + 10) * $itemsPerView;
+$buttonWidth = 40;
+$fontSizeMultiplier = 0.65;
+$sliderId = BrandSlider::HTML_ID . random_int(1, 10000);
+?>
+
+<div class="am-widget-brand-slider">
+    <style>
+        <?php if ($isSliderEnable): ?>
+        #<?= /* @noEscape */ $sliderId ?> {
+            max-width: <?= /* @noEscape */ $buttonWidth * 2 + $sliderWidth; ?>px;
+            padding: 0 <?= /* @noEscape */ $buttonWidth + 10 ?>px;
+        }
+        <?php endif;?>
+
+        #<?= /* @noEscape */ $sliderId ?> .ambrands-swiper-brand .ambrands-image-block,
+        #<?= /* @noEscape */ $sliderId ?> .ambrands-swiper-brand .ambrands-image-block > .ambrands-image {
+            <?php if ($imgWidth): ?>
+                max-width: <?= /* @noEscape */ $imgWidth ?>px;
+            <?php endif;?>
+            <?php if ($imgHeight): ?>
+                max-height: <?= /* @noEscape */ $imgHeight ?>px;
+            <?php endif;?>
+        }
+
+        .ambrands-swiper-brand .ambrands-empty {
+            max-width: <?= /* @noEscape */ $imgWidth ?>px;
+            line-height: <?= /* @noEscape */ $imgWidth ?>px;
+            font-size: <?= /* @noEscape */ $imgWidth * $fontSizeMultiplier ?>px;
+        }
+
+        @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
+        <?php if ($isSliderEnable): ?>
+            #<?= /* @noEscape */ $sliderId ?> .ambrands-swiper-brand .ambrands-image-block,
+            #<?= /* @noEscape */ $sliderId ?> .ambrands-swiper-brand .ambrands-image-block img {
+                max-width: <?= /* @noEscape */ ($itemsPerView <= count($items)) ?
+                $sliderWidth / $itemsPerView :
+                $sliderWidth / count($items)
+                ?>px;
+            }
+        <?php else: ?>
+            #<?= /* @noEscape */ $sliderId ?> .ambrands-swiper-brand .ambrands-image-block,
+            #<?= /* @noEscape */ $sliderId ?> .ambrands-swiper-brand .ambrands-image-block img {
+                <?php if ($imgWidth): ?>
+               max-width: <?= /* @noEscape */ $imgWidth;?>px;
+                <?php endif;?>
+                <?php if ($imgHeight): ?>
+               max-height: <?= /* @noEscape */ $imgHeight;?>px;
+                <?php endif;?>
+               }
+        <?php endif;?>
+        }
+
+        <?php if ($block->getHeaderColor()): ?>
+        .ambrands-slider-container.<?= /* @noEscape */ $sliderId ?> {
+            background-color: <?= $escaper->escapeHtml($block->getHeaderColor()) ?>
+        }
+        <?php endif; ?>
+
+        <?php if ($block->getTitleColor()): ?>
+        .ambrands-slider-container.<?= /* @noEscape */ $sliderId ?> .amslider-header-container {
+            color: <?= $escaper->escapeHtml($block->getTitleColor()) ?>
+        }
+        <?php endif; ?>
+
+    </style>
+    <div class="ambrands-slider-container <?= /* @noEscape */ $sliderId ?>">
+        <?php if ($block->getTitle()): ?>
+            <div class="amslider-header-container">
+                <?= $escaper->escapeHtml($block->getTitle()) ?>
+            </div>
+        <?php endif;?>
+        <div class="ambrands-slider amslider <?= $escaper->escapeHtml($isSliderEnable ? '-enable' : '') ?>"
+             id="<?= /** @noEscape */ $sliderId ?>">
+
+            <div class="ambrands-inner">
+                <?php if ($block->getData('buttons_show') && $isSliderEnable): ?>
+                    <button class="swiper-button-prev"
+                            aria-label="<?= $escaper->escapeHtmlAttr(__('Previous')) ?>"
+                            title="<?= $escaper->escapeHtmlAttr(__('Previous')) ?>"></button>
+                    <button class="swiper-button-next"
+                            aria-label="<?= $escaper->escapeHtmlAttr(__('Next')) ?>"
+                            title="<?= $escaper->escapeHtmlAttr(__('Next')) ?>"></button>
+                <?php endif; ?>
+                <div class="swiper-container">
+                    <div class="<?= /** @noEscape */ $swiperPrefix ?>wrapper">
+                        <?php foreach ($items as $brand): ?>
+                            <a href="<?= /** @noEscape */ $brand['url']?>"
+                               class="<?= /** @noEscape */ $swiperPrefix?>slide">
+                                <span class="ambrands-swiper-brand
+                                    <?= ($block->getData('show_label')) ? ' brand-label' : '' ?>"
+                                >
+                                <?php if ($brand['img']): ?>
+                                    <span class="ambrands-image-block">
+                                        <img alt="<?= $escaper->escapeHtml($brand['alt']) ?>"
+                                             title="<?= $escaper->escapeHtml($brand['alt']) ?>"
+                                             src="<?= /* @escapeNotVerified */ $escaper->escapeHtml($brand['img']); ?>"
+                                             class="ambrands-image"/>
+                                    </span>
+                                <?php else: ?>
+                                    <span class="ambrands-image-block">
+                                        <span class="ambrands-empty"><?= /** @noEscape */ $brand['label'][0] ?></span>
+                                    </span>
+                                <?php endif ?>
+
+                                <?php if ($block->getData('show_label')): ?>
+                                    <span class="ambrands-label"><?= $escaper->escapeHtml($brand['label']) ?></span>
+                                <?php endif; ?>
+                                </span>
+                            </a>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+
+            <?php if ($block->getData('pagination_show')): ?>
+                <div class="swiper-pagination"></div>
+            <?php endif; ?>
+        </div>
+    </div>
+    <?php if ($isSliderEnable): ?>
+        <script>
+            require(['jquery', 'swiper', 'domReady!'], function ($) {
+                new Swiper('#<?= /** @noEscape */ $sliderId ?> .swiper-container', {
+                    <?php foreach ($block->getSliderOptions() as $option => $value): ?>
+                        <?php $sliderConf = $option . ':' . $value . ',' ?>
+                        <?= /** @noEscape */ $sliderConf ?>
+                    <?php endforeach; ?>
+                    breakpoints: {
+                    <?php for ($i = 1; $i < $itemsPerView; $i++): ?>
+                        <?= /** @noEscape */ ($i + 1) * ($imgWidth + 20 + 10) + $buttonWidth * 2; ?> : {
+                            slidesPerView: <?= /** @noEscape */ $i ?>
+                            },
+                    <?php endfor; ?>
+                    },
+                    nextButton: '#<?= /** @noEscape */ $sliderId ?> .swiper-button-next',
+                    prevButton: '#<?= /** @noEscape */ $sliderId ?> .swiper-button-prev',
+                    spaceBetween: 10
+            });
+
+
+            });
+        </script>
+    <?php endif; ?>
+</div>
+

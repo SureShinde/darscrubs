@@ -1,0 +1,58 @@
+<?php
+/** @var \Amasty\Shopby\Block\Navigation\FilterRenderer\Category $block */
+/** @var \Amasty\Shopby\Model\Layer\Filter\CategoryItems $filterItems */
+/** @var \Amasty\Shopby\Model\Layer\Filter\Item $filterItem */
+/** @var \Magento\Framework\Escaper $escaper */
+
+$filterItems = $block->getFilter()->getItems();
+?>
+<?php foreach ($filterItems->getItems($block->getPath()) as $filterItem): ?>
+    <?php $uniqId = uniqid() ?>
+    <?php $currentPath = ($block->getPath() ?: $filterItems->getStartPath()) . '/' . $filterItem->getValueString() ?>
+    <li class="item
+        <?php if ($filterItems->getItemsCount($currentPath)): ?>
+            <?= "-is-collapsible" ?>
+        <?php endif; ?>
+        <?php if ($block->getFilter()->getItemsCount($currentPath)): ?>
+            <?= "-filter-parent" ?>
+        <?php endif; ?>"
+        data-label="<?= /* @noEscape */ $block->stripTags($filterItem->getOptionLabel()) ?>">
+        <?php if ($filterItems->getItemsCount($currentPath)): ?>
+            <span class="am-collapse-icon"></span>
+        <?php endif; ?>
+
+        <?php if ($filterItem->getCount()): ?>
+            <a class="am-filter-item-<?= /* @noEscape */ $escaper->escapeHtmlAttr($uniqId) ?>
+                <?php if ($block->getFilter()->getItemsCount($currentPath)): ?>
+                    <?= "amshopby-filter-parent"; ?>
+                <?php endif; ?>"
+                data-am-js="filter-item-default"
+                href="<?= $escaper->escapeUrl($filterItem->getUrl()) ?>"
+                <?= $filterItem->isAddNofollow() ? ' rel="nofollow"' : '' ?>>
+                <?= /* @noEscape */ $filterItem->getOptionLabel() ?>
+                <?php if ($block->getFilterSetting()->isShowProductQuantities()): ?>
+                    <span class="count"><?= /* @noEscape */ $filterItem->getCount() ?><span class="filter-count-label">
+                            <?php $title = ($filterItem->getCount() == 1) ? __('item') : __('items');?><?= $escaper->escapeHtml($title) ?></span></span>
+                <?php endif; ?>
+            </a>
+            <input class="amshopby-<?= /* @noEscape */ $block->getInputType() ?>"
+                   name="amshopby[<?= /* @noEscape */ $block->getFilter()->getRequestVar() ?>][]"
+                   value="<?= $escaper->escapeHtmlAttr($filterItem->getValueString()) ?>"
+                   type="<?= /* @noEscape */ $block->getInputType() ?>"
+                <?=  /* @noEscape */ $block->checkedFilter($filterItem) ? ' checked' : '' ?>
+            />
+            <span class="amshopby-choice"></span>
+        <?php else: ?>
+            <?= /* @noEscape */ $filterItem->getOptionLabel() ?>
+            <?php if ($block->getFilterSetting()->isShowProductQuantities()): ?>
+                <span class="count"><?= /* @noEscape */ $filterItem->getCount() ?><span class="filter-count-label">
+                         <?php $title = ($filterItem->getCount() == 1) ? __('item') : __('items');?><?= $escaper->escapeHtml($title) ?></span></span>
+            <?php endif; ?>
+        <?php endif; ?>
+        <?php if ($filterItems->getItemsCount($currentPath)): ?>
+            <ol class="items items-children -folding level-<?= /* @noEscape */ $block->getLevel(); ?>">
+                <?= /* @noEscape */ $block->renderChildrenItems($currentPath); ?>
+            </ol>
+        <?php endif; ?>
+    </li>
+<?php endforeach; ?>

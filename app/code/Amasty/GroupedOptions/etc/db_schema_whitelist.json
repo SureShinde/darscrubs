@@ -1,0 +1,55 @@
+{
+    "amasty_grouped_options_group": {
+        "column": {
+            "group_id": true,
+            "attribute_id": true,
+            "name": true,
+            "group_code": true,
+            "url": true,
+            "position": true,
+            "visual": true,
+            "type": true,
+            "enabled": true
+        },
+        "index": {
+            "AMASTY_GROUP_GROUP_CODE": true,
+            "AMASTY_GROUP_POSITION": true,
+            "AMASTY_GROUP_ENABLED": true,
+            "AMASTY_GROUP_ATTRIBUTE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AMASTY_GROUP_ATTR_ID_EAV_ATTR_ATTR_ID": true,
+            "AMASTY_GROUP_ATTR_ID_GROUP_CODE": true
+        }
+    },
+    "amasty_grouped_options_group_option": {
+        "column": {
+            "group_option_id": true,
+            "group_id": true,
+            "option_id": true,
+            "sort_order": true
+        },
+        "index": {
+            "AMASTY_GROUP_OPT_GROUP_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AMASTY_GROUP_OPT_GRP_ID_AMASTY_GROUP_GRP_ID": true,
+            "AMASTY_GROUP_OPT_OPT_ID_EAV_ATTR_OPT_OPT_ID": true,
+            "AMASTY_GROUP_OPT_GROUP_ID_OPTION_ID": true
+        }
+    },
+    "amasty_grouped_options_group_value": {
+        "column": {
+            "group_option_id": true,
+            "group_id": true,
+            "value": true,
+            "sort_order": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AMASTY_GROUP_VALUE_GRP_ID_AMASTY_GROUP_GRP_ID": true
+        }
+    }
+}

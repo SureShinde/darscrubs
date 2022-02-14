@@ -1,0 +1,226 @@
+.swatch_window {
+    position: relative;
+    overflow: visible !important;
+    width: 25px !important;
+    height: 24px !important;
+    border: 1px solid #c6c5c3 !important;
+    cursor: pointer;
+}
+
+.swatch_window:after {
+    position: absolute;
+    top: -5px;
+    right: -20px;
+    z-index: 8;
+    width: 16px;
+    height: 32px;
+    border: 1px solid rgb(173, 173, 173);
+    border-radius: 0 3px 3px 0;
+    background: #fff;
+    color: #808080;
+    content: '\2193';
+    text-align: center;
+    font-size: 19px;
+}
+
+.swatch_window:before {
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    z-index: 1;
+    width: 32px;
+    height: 30px;
+    outline: 1px solid rgb(173, 173, 173);
+    border: 3px solid rgb(255, 255, 255);
+    border-radius: 3px 0 0 3px;
+    background: transparent;
+    color: #808080;
+    content: '';
+    font-size: 19px;
+}
+
+.swatch_sub-menu_container {
+    top: 30px !important;
+}
+
+.field-visual .admin__field {
+    position: relative;
+}
+
+.swatches-visual-col .admin__field-control {
+    position: relative;
+    box-sizing: content-box;
+}
+
+.swatches-visual-col .admin__field-control.unavailable:after {
+    position: absolute;
+    top: 15px;
+    left: -3px;
+    z-index: 5;
+    width: 34px;
+    height: 2px;
+    background: #f00;
+    content: '';
+    transform: rotate(-45deg);
+}
+
+.swatches-visual-col .swatch_window {
+    margin-top: 3px;
+}
+
+.admin__fieldset > .admin__field.swatches-visual-col > .admin__field-control {
+    margin-left: 34px;
+    width: auto;
+}
+
+input.input-checkbox {
+    position: relative;
+    display: inline-block;
+    margin: 0 5px 0 0;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #adadad;
+    border-radius: 2px;
+    background: #fff;
+    vertical-align: middle;
+    cursor: pointer;
+    transition: all .1s ease-in;
+    appearance: none;
+}
+
+input.input-checkbox:checked:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    width: 14px;
+    color: #514943;
+    content: '\e62d';
+    text-align: center;
+    font-weight: 400;
+    font-size: 11px;
+    font-family: 'Admin Icons';
+    line-height: 13px;
+}
+
+.col-short {
+    width: 10%;
+}
+
+.admin__control-table .col-draggable {
+    padding-top: 1.6rem;
+}
+
+td.col-option {
+    text-align: center;
+}
+
+select.admin__control-select,
+table.admin__control-table {
+    width: 50%;
+}
+
+.swatch_option-cursor {
+    cursor: pointer;
+}
+
+.swatch_option {
+    position: relative;
+    display: inline-block;
+    float: right;
+    overflow: visible !important;
+    width: 25px !important;
+    height: 24px !important;
+}
+
+.option_value {
+    display: inline-block;
+}
+
+.am-search-container .am-label {
+    vertical-align: middle;
+    text-align: right;
+}
+
+.am-search-input {
+    border: 1px solid #adadad;
+}
+
+.am-search-input:focus {
+    border-color: #007bdb;
+}
+
+.data-table .swatches-visual-col.unavailable:after {
+    top: calc(50% - 2px);
+}
+
+/* Magento styles override */
+.swatch_window {
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/* Inputs */
+.amgrouped-inputs-block {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 10px 10px 15px;
+    background-color: #efefef;
+}
+
+.amgrouped-input-wrap {
+    margin: 0 5px;
+    max-width: calc(100% / 3 - 10px);
+    width: 100%;
+}
+
+.amgrouped-input-wrap .amgrouped-label {
+    display: inline-flex;
+    padding: 5px 0 10px;
+    color: #303030;
+    font-weight: 600;
+    font-size: 1.4rem;
+}
+
+.amgrouped-input-wrap .amgrouped-input {
+    padding: 6px 10px;
+    min-width: auto;
+    border-radius: 2px;
+}
+
+/* Attribute options */
+.amgrouped-checkbox-set .admin__field.amgrouped-item ~ .amgrouped-item {
+    margin-top: 1px;
+}
+
+.amgrouped-checkbox-set .amgrouped-item {
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    min-height: 50px;
+    width: 50%;
+    background: #eeefef;
+}
+
+.amgrouped-item.-price {
+    padding: 0 10px 10px;
+}
+
+.amgrouped-checkbox-set .amgrouped-swatch {
+    display: inline-flex;
+    margin: 0 0 0 auto;
+    width: 25px;
+    height: 25px;
+}
+
+.admin__field-control.amgrouped-checkbox-set > .admin__field-option.amgrouped-item {
+    display: flex;
+}
+
+.amgrouped-checkbox-set .amgrouped-input-wrap {
+    display: inline-flex;
+    flex-direction: column;
+    max-width: 100%;
+}

@@ -1,0 +1,79 @@
+<?php
+/**
+ * @var \Amasty\Shopby\Block\Product\ProductList\ChildrenCategoryList $block
+ * @var \Magento\Catalog\Model\Category[] $categories
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+$categories = $block->getChildrenCategories();
+$size = $block->getImageSize();
+$swiperPrefix = $block->isSliderEnabled() ? 'swiper-' : '';
+?>
+
+<?php if (count($categories)): ?>
+    <div class="amslider-container <?= /* @noEscape */ $block->isSliderEnabled() ? 'am-swiper-slider' : '' ?>">
+        <div class="amslider amshopby-categories-slider" id="category-carousel">
+            <?php if ((count($categories) > $block->getItemsCountPerSlide()) && $block->isSliderEnabled()): ?>
+                <button class="swiper-button-prev"
+                        data-amshopby-js="children-category-swiper-prev"
+                        aria-label="<?= $escaper->escapeHtmlAttr(__('Previous')) ?>"
+                        title="<?= $escaper->escapeHtmlAttr(__('Previous')) ?>"></button>
+                <button class="swiper-button-next"
+                        data-amshopby-js="children-category-swiper-next"
+                        aria-label="<?= $escaper->escapeHtmlAttr(__('Next')) ?>"
+                        title="<?= $escaper->escapeHtmlAttr(__('Next')) ?>"></button>
+            <?php endif; ?>
+            <div class="children-category-container <?= /* @noEscape */ $swiperPrefix ?>container"
+                 <?php if ($block->isSliderEnabled()): ?>
+                 data-mage-init='{"amShopbySwiperSlider":{
+                    "slidesPerView": "<?= /* @noEscape */ $block->getItemsCountPerSlide()?>",
+                    "loop": true,
+                    "simulateTouch": true,
+                    "breakpoints": {
+                        "320": {
+                            "slidesPerView": 1,
+                            "spaceBetween": 10
+                        },
+                        "480": {
+                            "slidesPerView": 2,
+                            "spaceBetween": 20
+                        }
+                    },
+                    "nextButton": "[data-amshopby-js=\"children-category-swiper-next\"]",
+                    "prevButton": "[data-amshopby-js=\"children-category-swiper-prev\"]",
+                    "spaceBetween": 30
+                }}'
+                <?php endif; ?>
+            >
+                <div class="<?= /* @noEscape */ $swiperPrefix ?>wrapper">
+                    <?php foreach ($categories as $category): ?>
+                        <?php $imgUrl = $block->getCategoryImageUrl($category, $size) ?>
+                        <?php if ($imgUrl): ?>
+                            <a title="<?= $escaper->escapeHtmlAttr($category->getName()) ?>"
+                               href="<?= $escaper->escapeUrl($category->getUrl()) ?>"
+                               class="<?= /* @noEscape */ $swiperPrefix; ?>slide">
+                                <div class="<?= /* @noEscape */ $swiperPrefix ?>category-item
+                                    <?= /* @noEscape */ ($block->showLabels()) ? ' category-item-label' : '' ?>">
+                                    <?php if (!$block->isOnlyLabels()): ?>
+                                        <img height="<?= /* @noEscape */ $size ?>"
+                                             width="<?= /* @noEscape */ $size ?>"
+                                             src="<?= $escaper->escapeUrl($imgUrl) ?>"/>
+                                    <?php endif; ?>
+
+                                    <?php if ($block->showLabels() || $block->isOnlyLabels()): ?>
+                                        <div class="category-item-title"
+                                            <?php $style = 'style="max-width: ' . $size . 'px"' ?>
+                                            <?= /* @noEscape */ $block->isSliderEnabled() ? '' : $style ?>
+                                        >
+                                            <?= $escaper->escapeHtml($category->getName()) ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </a>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

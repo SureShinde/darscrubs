@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="darscrubs" translate="label" sortOrder="10">
+            <label>Darscrubs</label>
+        </tab>
+        <section id="homepage" translate="label" type="text" sortOrder="135" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Homepage og image</label>
+            <tab>darscrubs</tab>
+            <resource>Darscrubs_Customization::HomepageOgImage</resource>
+            <group id="og" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Og image</label>
+                <field id="image" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Og Image path</label>
+                    <comment>If blank, logo image will be considered as og image.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="emizentech" sortOrder="999" translate="label">
+			<label>EmizenTech</label>
+		</tab>
+		<section id="dearsystems" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="10" translate="label">
+			<label>Dear Systems</label>
+			<tab>emizentech</tab>
+			<resource>Emizentech_Revelup::config_emizentech_dearsystems</resource>
+			<group id="genetal" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="10" translate="label">
+				<label>General</label>
+				<field id="enabled" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="10" translate="label" type="select">
+					<label>Module Status</label>
+					<comment/>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="api_endpoint" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="20" translate="label" type="text">
+					<label>API EndPoint URL</label>
+					<comment/>
+				</field>
+				<field id="api_auth_accountid" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="30" translate="label" type="text">
+					<label>api-auth-accountid</label>
+					<comment/>
+				</field>
+				<field id="api_auth_applicationkey" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="40" translate="label" type="text">
+					<label>api-auth-applicationkey</label>
+					<comment/>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

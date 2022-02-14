@@ -1,0 +1,20 @@
+<div class="amgrouped-inputs-block">
+<!-- ko foreach: { data: $data.storeData}  -->
+    <div class="amgrouped-input-wrap">
+        <label class="amgrouped-label"
+               data-bind="attr: {for: $index() ? $parent.uid + value : $parent.uid}, text: label"></label>
+        <input class="amgrouped-input admin__control-text" type="text"
+               data-bind="
+                    event: {change: $parent.setTitleValue},
+                    value: value,
+                    valueUpdate: $parent.valueUpdate,
+                    attr: {
+                        name: $parent.inputName + '[' + $data.index + ']',
+                        placeholder: $parent.placeholder,
+                        id: $index() ? $parent.uid + value : $parent.uid,
+                        disabled: $parent.disabled,
+                        maxlength: 255
+        }"/>
+    </div>
+<!-- /ko -->
+</div>

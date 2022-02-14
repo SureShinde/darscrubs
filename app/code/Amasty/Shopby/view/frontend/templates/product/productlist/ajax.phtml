@@ -1,0 +1,36 @@
+<?php
+/**
+ * @var \Amasty\Shopby\Block\Product\ProductList\Ajax $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+if (!$block->canShowBlock()) {
+    return;
+}
+?>
+
+<script type="text/x-magento-init">
+{
+    "body.page-with-filter, body.catalogsearch-result-index": {
+        "amShopbyAjax": {
+                "submitByClick": <?= (int) $block->submitByClick() ?>,
+                "scrollUp": <?= /* @noEscape */ $block->scrollUp() ?>,
+                "clearUrl": "<?= $escaper->escapeJs($block->getClearUrl()) ?>",
+                "currentCategoryId": "<?= /* @noEscape */ $block->getCurrentCategoryId() ?>",
+                "isCategorySingleSelect": "<?= /* @noEscape */ $block->isCategorySingleSelect() ?>",
+                "isMemorizerAllowed": "<?= (int) $block->isMemorizingAllowed() ?>"
+            }
+        }
+}
+</script>
+<?php if ($block->isGoogleTagManager()): ?>
+    <script type="text/x-magento-init">
+        {
+            "*": {
+                "Amasty_Shopby/js/googleTag": {
+                    "gtmAccountId": "<?= $escaper->escapeHtml($block->getGtmAccountId()) ?>"
+                }
+            }
+        }
+    </script>
+<?php endif; ?>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="general"> 
+     <field name="establishment">
+        <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">50</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="dataScope" xsi:type="string">establishment</item>
+                    <item name="class" xsi:type="string">Emizentech\Revelup\Model\DataProvider</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="label" xsi:type="string" translate="true">Establishment</item>
+                </item>
+        </argument>
+    </field>
+    <field name="dearsystem_location_name">
+        <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">50</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="dataScope" xsi:type="string">dearsystem_location_name</item>
+                    <item name="class" xsi:type="string">Emizentech\Revelup\Model\DataProvider</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="label" xsi:type="string" translate="true">Dearsystem location name</item>
+                </item>
+        </argument>
+    </field>
+    <field name="dearsystem_location_id">
+        <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">50</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="dataScope" xsi:type="string">dearsystem_location_id</item>
+                    <item name="class" xsi:type="string">Emizentech\Revelup\Model\DataProvider</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="label" xsi:type="string" translate="true">Dearsystem location id</item>
+                </item>
+        </argument>
+    </field>   
+  </fieldset>
+</form>

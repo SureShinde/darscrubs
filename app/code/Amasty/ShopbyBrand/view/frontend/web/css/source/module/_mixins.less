@@ -1,0 +1,67 @@
+//
+//  Mixins
+//  ______________________________________________
+
+.ambrands-input-placeholder(
+    @_input-placeholder-color: #575757,
+    @_input-placeholder-active-color: #c7c7c7,
+    @_input-placeholder-font-weight: 400,
+    @_input-placeholder-font-size: 14px,
+    @_input-placeholder-line-height: 20px
+) {
+    &::-webkit-input-placeholder {
+        color: @_input-placeholder-color;
+        font-weight: @_input-placeholder-font-weight;
+        font-size: @_input-placeholder-font-size;
+        line-height: @_input-placeholder-line-height;
+    }
+
+    &:-moz-placeholder {
+        color: @_input-placeholder-color;
+        font-weight: @_input-placeholder-font-weight;
+        font-size: @_input-placeholder-font-size;
+        line-height: @_input-placeholder-line-height;
+        opacity: 1;
+    }
+
+    &::-moz-placeholder {
+        color: @_input-placeholder-color;
+        font-weight: @_input-placeholder-font-weight;
+        font-size: @_input-placeholder-font-size;
+        line-height: @_input-placeholder-line-height;
+        opacity: 1;
+    }
+
+    &:-ms-input-placeholder {
+        color: @_input-placeholder-color;
+        font-weight: @_input-placeholder-font-weight;
+        font-size: @_input-placeholder-font-size;
+        line-height: @_input-placeholder-line-height;
+    }
+
+    &:focus {
+        &::-webkit-input-placeholder {
+            color: @_input-placeholder-active-color;
+        }
+        &:-moz-placeholder {
+            color: @_input-placeholder-active-color;
+        }
+        &::-moz-placeholder {
+            color: @_input-placeholder-active-color;
+        }
+        &:-ms-input-placeholder {
+            color: @_input-placeholder-active-color;
+        }
+    }
+}
+
+.ambrands-word-break {
+    & {
+        word-wrap: break-word;
+        word-break: break-word;
+    }
+
+    .ie11 & {
+        word-break: break-all;
+    }
+}

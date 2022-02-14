@@ -1,0 +1,103 @@
+//
+//  Amasty JetTheme compatibility
+//  _____________________________________________
+
+//
+//  Imports
+//  ---------------------------------------------
+
+@import '../module/_mixins';
+
+//
+//  Variables
+//  ---------------------------------------------
+
+@ambrands-filter__active__color: @color-green;
+@ambrands-filter__active__text-color: #475524;
+@ambrands-filter__hover__color: #f2f8e2;
+@ambrands-filter__pressed__color: #e7f2ca;
+@ambrands-filter__disabled__color: #f8f8f8;
+@ambrands-filter__disabled__text-color: #a8a69f;
+@ambrands-filter-button__border-radius: 4px;
+@ambrands-filter-button__font-size: 16px;
+@ambrands-filter-button__size: 36px;
+@ambrands-filter-button__text-color: @color-black;
+@ambrands-filter-input__height: 50px;
+@ambrands-filter-input__line-height: 18px;
+@ambrands-filter-input__text-color: @color-black;
+@ambrands-filter-input__active__color: @color-black;
+@ambrands-filter-input__border-radius: 7px;
+@ambrands-filter-icon__size: 25px;
+@ambrands-filter-icon__search: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjUiIGhlaWdodD0iMjYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xNi4xNzggMTguMTM5YTkuNDAzIDkuNDAzIDAgMDEtNS45MDMgMi4wNzJjLTUuMjE1IDAtOS40NDItNC4yMjYtOS40NDItOS40NCAwLTUuMjEyIDQuMjI3LTkuNDM4IDkuNDQyLTkuNDM4IDUuMjE0IDAgOS40NDEgNC4yMjYgOS40NDEgOS40MzlhOS4zOTcgOS4zOTcgMCAwMS0yLjA3OCA1LjkwOWw2LjUyOSA2LjUyNy0xLjQ2IDEuNDU4LTYuNTI5LTYuNTI3ek0xOCAxMC43NzJhNy43MjQgNy43MjQgMCAwMS03LjcyNSA3LjcyMyA3LjcyNCA3LjcyNCAwIDExMC0xNS40NDZBNy43MjQgNy43MjQgMCAwMTE4IDEwLjc3MnoiIGZpbGw9IiMzRDM3MzEiLz48L3N2Zz4=) center no-repeat;
+@ambrands-filter-icon__clear: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjUiIGhlaWdodD0iMjYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0zLjMzMyAyMC45NTZMMjAuNDU2IDMuODMzbDEuMjEgMS4yMUw0LjU0NSAyMi4xNjdsLTEuMjEtMS4yMXoiIGZpbGw9IiMzRDM3MzEiLz48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTIxLjY2NyAyMC45NTZMNC41NDQgMy44MzNsLTEuMjEgMS4yMSAxNy4xMjIgMTcuMTIzIDEuMjEtMS4yMXoiIGZpbGw9IiMzRDM3MzEiLz48L3N2Zz4=) center no-repeat;
+@ambrands-item__hover__color: @color-green;
+@ambrands-item__active__color: rgba(177, 230, 55, .15);
+@ambrands-item__color: @color-black;
+
+//
+//  Common
+//  ---------------------------------------------
+
+& when (@media-common = true) {
+    .amasty-jet-theme {
+        .ambrands-letters-filter .ambrands-letter {
+            margin: 0 10px 10px 0;
+            transition: none;
+        }
+
+        .ambrands-search-block .ambrands-input {
+            .ambrands-input-placeholder(#a8a69f, @color-gray-light, 400, 14px, 16px);
+        }
+    }
+}
+
+//
+//  Desktop
+//  ----------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .ambrands-letters-filter .ambrands-letter {
+        margin: 0 9px 9px 0;
+    }
+
+    .amasty-jet-theme .ambrands-list-popup {
+        & {
+            border-radius: 4px;
+            box-shadow: none;
+        }
+
+        .ambrands-list-container {
+            background: #f8f8f8;
+        }
+
+        .ambrands-letters-filter {
+            background: transparent;
+        }
+    }
+
+    .ambrands-letter .ambrands-brand-item .ambrands-label {
+        letter-spacing: .03em;
+        font-weight: 500;
+        line-height: 16px;
+    }
+
+    .ambrands-list-popup .ambrands-letters-filter {
+        & {
+            position: relative;
+        }
+
+        .ambrands-letter {
+            margin: 0 5px 10px;
+        }
+
+        &:before {
+            position: absolute;
+            top: 20px;
+            right: 0;
+            width: 1px;
+            height: ~'calc(100% - 40px)';
+            background: @color-gray-light;
+            content: '';
+        }
+    }
+}

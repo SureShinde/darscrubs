@@ -1,0 +1,36 @@
+<?php
+/** @var \Amasty\Shopby\Block\Navigation\ApplyButton $block */
+/** @var \Magento\Framework\Escaper $escaper */
+
+use Amasty\Shopby\Block\Navigation\UrlModifier;
+
+$postfix = uniqid();
+?>
+
+<?php if ($block->blockEnabled()): ?>
+    <?php if (!$block->isAjaxEnabled()): ?>
+        <form data-amshopby-filter="">
+            <input type="hidden"
+                   name="<?= /* @noEscape */ UrlModifier::VAR_REPLACE_URL ?>"
+                   value="1"/>
+        </form>
+    <?php endif; ?>
+    <div class="am_shopby_apply_filters">
+        <div class="am-show-button -horizontal">
+            <span class="am-items"></span>
+            <button amshopby-apply-filter="1"
+                    id="amasty_shopby_apply_filters_<?= /* @noEscape */ $postfix ?>"
+                    data-mage-init='{"amShopbyApplyFilters":{
+                        "ajaxEnabled": <?= /* @noEscape */ ($block->isAjaxEnabled() ? '1' : '0') ?>,
+                        "navigationSelector": "<?= $escaper->escapeHtml($block->getNavigationSelector()) ?>",
+                        "clearUrl": "<?= $escaper->escapeUrl($block->getClearUrl()) ?>",
+                        "buttonPosition": "<?= $escaper->escapeHtml($block->getButtonPosition()) ?>"
+                    }}'
+                    title="<?= $escaper->escapeHtmlAttr(__('Apply Filters')) ?>"
+                    aria-label="<?= $escaper->escapeHtmlAttr(__('Apply Filters')) ?>"
+                    class="amshopby-button">
+                <?= $escaper->escapeHtml(__('Apply')) ?>
+            </button>
+        </div>
+    </div>
+<?php endif; ?>

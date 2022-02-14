@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Amasty\ShopbyBrand\Model\Brand\BrandDataInterface" type="Amasty\ShopbyBrand\Model\Brand\BrandData"/>
+    <type name="Amasty\ShopbyBase\Model\FilterSetting\AttributeConfig">
+        <arguments>
+            <argument name="attributeProviders" xsi:type="array">
+                <item name="amasty_shopby_brand_attriubte_list_provider" xsi:type="object">Amasty\ShopbyBrand\Model\FilterSetting\AttributeListProvider</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Xsearch\Block\Search\Brand">
+        <plugin name="Amasty_ShopbyBrand::addBrands" type="Amasty\ShopbyBrand\Plugin\Xsearch\Block\Search\Brand" />
+    </type>
+
+    <type name="Amasty\ShopbyBase\Model\UrlBuilder">
+        <arguments>
+            <argument name="urlAdapters" xsi:type="array">
+                <item name="brand" xsi:type="array">
+                    <item name="adapter" xsi:type="object">Amasty\ShopbyBrand\Model\UrlBuilder\Adapter</item>
+                    <item name="sort_order" xsi:type="string">10</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Sitemap\Model\ItemProvider\Composite">
+        <arguments>
+            <argument name="itemProviders" xsi:type="array">
+                <item name="amBrand" xsi:type="object">Amasty\ShopbyBrand\Model\Sitemap\ItemProvider\Brand</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\XmlSitemap\Model\Sitemap\SourceProvider">
+        <arguments>
+            <argument name="sources" xsi:type="array">
+                <item name="amasty_shopbybrand" xsi:type="string">Amasty\ShopbyBrand\Model\XmlSitemap\Source\Brand</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\ShopbyBrand\Model\ProductCount">
+        <arguments>
+            <argument name="collectionFactory" xsi:type="object">Magento\CatalogSearch\Model\ResourceModel\Fulltext\CollectionFactory</argument>
+        </arguments>
+    </type>
+</config>

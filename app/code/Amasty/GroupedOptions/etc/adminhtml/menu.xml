@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Amasty_GroupedOptions::group_options"
+             title="Manage Grouped Options"
+             module="Amasty_GroupedOptions"
+             parent="Magento_Backend::stores_attributes"
+             sortOrder="80"
+             action="amgrouped_options/group/index"
+             resource="Amasty_GroupedOptions::group_options"
+        />
+    </menu>
+</config>

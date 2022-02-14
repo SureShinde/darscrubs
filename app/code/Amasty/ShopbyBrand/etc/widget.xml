@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="amshopby_brand_list" class="Amasty\ShopbyBrand\Block\Widget\BrandList" is_email_compatible="true"
+            placeholder_image="Magento_Cms::images/widget_block.png">
+        <label translate="true">Amasty Brand List</label>
+        <description translate="true">List of your brand attribute options. Links lead to Brand Pages.</description>
+        <parameters>
+            <parameter name="columns" xsi:type="text" visible="true" required="true">
+                <label translate="true">Number of Columns</label>
+                <value>4</value>
+            </parameter>
+            <parameter name="show_images" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show Brand Logo</label>
+            </parameter>
+            <parameter name="image_width" xsi:type="text" visible="true">
+                <label translate="true">Image Max Width, px</label>
+                <value>100</value>
+            </parameter>
+            <parameter name="image_height" xsi:type="text" visible="true">
+                <label translate="true">Image Max Height, px</label>
+                <description translate="true">Optional.</description>
+            </parameter>
+            <parameter name="show_search" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Enable Search</label>
+            </parameter>
+            <parameter name="show_filter" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Enable Filter by Character</label>
+            </parameter>
+            <parameter name="filter_display_all" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show Characters without Brands</label>
+                <description translate="true">in a Filter by Character.</description>
+                <depends>
+                    <parameter name="show_filter" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="show_count" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show Products Quantity</label>
+                <description translate="true">Show the number of products next to Brand name. Please note that this setting may affect performance.</description>
+            </parameter>
+            <parameter name="display_zero" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show Brands without Products</label>
+                <description translate="true">Please note that this setting may affect performance.</description>
+            </parameter>
+
+            <parameter name="template" xsi:type="select" visible="false">
+                <label translate="true">Template</label>
+                <options>
+                    <option name="default" value="widget/brand_list/index.phtml" selected="true">
+                        <label translate="true">Index</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+    </widget>
+
+    <widget id="amshopby_brand_slider" class="Amasty\ShopbyBrand\Block\Widget\BrandSlider" is_email_compatible="false"
+            placeholder_image="Magento_Cms::images/widget_block.png">
+        <label translate="true">Amasty Brand Slider</label>
+        <description translate="true">Brand Slider</description>
+        <parameters>
+            <parameter name="items_number" xsi:type="text" visible="true" required="true">
+                <label translate="true">Visible Items Quantity</label>
+                <value>4</value>
+            </parameter>
+            <parameter name="display_zero" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show Brands without Products</label>
+                <description translate="true">Disable to display only the brands that have products assigned to them.</description>
+            </parameter>
+            <parameter name="sort_by" xsi:type="select" visible="true" source_model="Amasty\ShopbyBrand\Model\Source\SliderSort">
+                <label translate="true">Sort By</label>
+            </parameter>
+            <parameter name="slider_width" xsi:type="text" visible="true">
+                <label translate="true">Slider Max Width, px</label>
+                <value>800</value>
+            </parameter>
+            <parameter name="slider_title" xsi:type="text" visible="true" >
+                <label translate="true">Header Title</label>
+                <value>Featured Brands</value>
+            </parameter>
+            <parameter name="slider_header_color" xsi:type="text" visible="true" >
+                <label translate="true">Slider Background Color</label>
+            </parameter>
+            <parameter name="slider_title_color" xsi:type="text" visible="true" >
+                <label translate="true">Header Text Color</label>
+                <value>#000</value>
+            </parameter>
+            <parameter name="image_width" xsi:type="text" visible="true" required="true">
+                <label translate="true">Image Max Width, px</label>
+                <value>130</value>
+            </parameter>
+            <parameter name="image_height" xsi:type="text" visible="true">
+                <label translate="true">Image Max Height, px</label>
+                <description translate="true">Optional.</description>
+            </parameter>
+            <parameter name="show_label" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show Brand Label</label>
+            </parameter>
+            <parameter name="buttons_show" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show Buttons</label>
+                <description translate="true">Display Prev/Next buttons.</description>
+            </parameter>
+            <parameter name="infinity_loop" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Infinity Loop</label>
+                <description translate="true">Enable continuous loop mode.</description>
+            </parameter>
+            <parameter name="simulate_touch" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Simulate Touch</label>
+                <description translate="true">Click and drag to change slides on desktop. On mobile devices swipe is always available.</description>
+            </parameter>
+            <parameter name="pagination_show" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show Pagination</label>
+            </parameter>
+            <parameter name="pagintaion_clickable" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Clickable Pagination</label>
+                <depends>
+                    <parameter name="pagination_show" value="1"/>
+                </depends>
+            </parameter>
+            <parameter name="autoplay" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Autoplay</label>
+            </parameter>
+            <parameter name="autoplay_delay" xsi:type="text" visible="true">
+                <label translate="true">Autoplay Delay</label>
+                <depends>
+                    <parameter name="autoplay" value="1"/>
+                </depends>
+                <value>1500</value>
+            </parameter>
+
+            <parameter name="template" xsi:type="select" visible="false">
+                <label translate="true">Template</label>
+                <options>
+                    <option name="default" value="widget/brand_list/slider.phtml" selected="true">
+                        <label translate="true">Slider</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

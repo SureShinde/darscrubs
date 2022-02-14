@@ -1,0 +1,117 @@
+//
+//  Inputs styles
+//  __________________________________________________
+
+//
+//  Imports
+//  --------------------------------------------------
+
+@import '../_mixins';
+
+//
+// Variables
+//  --------------------------------------------------
+
+@amshopby-choice__color__error: #f23b3b;
+@amshopby-choice-element__width__m: 12px;
+@amshopby-choice-element__width__s: 25px;
+@amshopby-choice-element__border-color: #e3e3e3;
+@amshopby-choice-element__hover__border-color: @amshopby__primary__color;
+@amshopby-choice-element__focus__border-color: @amshopby__primary__color;
+@amshopby-choice-element__background: #fff;
+@amshopby-choice-element__line-height: 1.2;
+@amshopby-choice-element-checkbox__border-radius: 2px;
+@amshopby-choice-element-checkbox__active__background: @amshopby__primary__color;
+@amshopby-choice-element-checkbox__checked__background-image: ~'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAxNSAxNSI+CiAgPGRlZnMvPgogIDxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xMS42NjkzIDMuNTAwNjFjLS4yMDc4LjAwNjk1LS40MDQ4LjA5ODg1LS41NDkzLjI1NjItMS45NTcwMyAyLjA2NDE1LTMuNDM4ODMgMy43NzY1NS01LjI4MDQxIDUuNzQ3ODNMMy44MTczIDcuNzA0NzRjLS4wNzk5Mi0uMDcxNi0uMTcyNDUtLjEyNTk1LS4yNzIzMy0uMTU5OTItLjA5OTg3LS4wMzM5Ny0uMjA1MTItLjA0NjktLjMwOTc0LS4wMzgwNi0uMTA0NjIuMDA4ODUtLjIwNjU2LjAzOTI5LS4zLjA4OTYtLjA5MzQ1LjA1MDMtLjE3NjU2LjExOTQ4LS4yNDQ1OS4yMDM2LS4wNjgwNC4wODQxMS0uMTE5NjYuMTgxNTEtLjE1MTkzLjI4NjYyLS4wMzIyNy4xMDUxMS0uMDQ0NTUuMjE1ODgtLjAzNjE1LjMyNTk4LjAwODQxLjExMDExLjAzNzM0LjIxNzQuMDg1MTUuMzE1NzQuMDQ3ODEuMDk4MzMuMTEzNTUuMTg1NzkuMTkzNDguMjU3MzlMNS4zNzc3MSAxMS4yOThjLjE1MzE1LjEzNzkuMzUwMTkuMjA5OC41NTE2LjIwMTMuMjAxNDEtLjAwODYuMzkyMzEtLjA5NjkuNTM0NDQtLjI0NzNDOC42MTA3NCA4Ljk4NzU3IDEwLjE0MiA3LjE3NTQ0IDEyLjI1NiA0Ljk0NTc4Yy4xMTY1LS4xMTgzNy4xOTYtLjI3MTIuMjI4MS0uNDM4MjMuMDMyMS0uMTY3MDMuMDE1My0uMzQwMzgtLjA0ODQtLjQ5NzA5LS4wNjM2LS4xNTY3MS0uMTcwOS0uMjg5MzctLjMwNzgtLjM4MDQyLS4xMzY5LS4wOTEwNS0uMjk2OC0uMTM2MTktLjQ1ODYtLjEyOTQzeiIvPgo8L3N2Zz4K)';
+
+//
+//  Common
+//  --------------------------------------------------
+
+.am-checkbox-mixin(
+    @size: @amshopby-choice-element__width__m
+) {
+    & {
+        .am-visually-hidden;
+
+        position: absolute;
+    }
+
+    & + .amshopby-choice {
+        .am-word-break;
+
+        position: absolute;
+        top: 5px;
+        left: 0;
+        display: block;
+        margin: 0;
+        padding: 0 0 0 @size + @indent__s;
+        min-height: @size;
+        line-height: @amshopby-choice-element__line-height;
+        cursor: pointer;
+    }
+
+    & + .amshopby-choice:before,
+    & + .amshopby-choice:after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: inline-block;
+        box-sizing: border-box;
+        width: @size;
+        height: @size;
+        border-radius: @amshopby-choice-element-checkbox__border-radius;
+        content: '';
+    }
+
+    & + .amshopby-choice:before {
+        border: 1px solid @amshopby-choice-element__border-color;
+        background: @amshopby-choice-element__background;
+    }
+
+    & + .amshopby-choice:after {
+        background: @amshopby-choice-element-checkbox__active__background @amshopby-choice-element-checkbox__checked__background-image center/@size;
+        content: none;
+    }
+
+    & + .amshopby-choice:hover:before,
+    &:checked + .amshopby-choice:before {
+        border-color: @amshopby-choice-element__hover__border-color;
+    }
+
+    &:checked + .amshopby-choice:after {
+        content: '';
+    }
+
+    &:active + .amshopby-choice:before,
+    &:focus + .amshopby-choice:before {
+        ._keyfocus &,
+        & {
+            border-color: @amshopby-choice-element__focus__border-color;
+        }
+    }
+
+    &:not(:checked).mage-error + .amshopby-choice:before {
+        border-color: @amshopby-choice__color__error;
+    }
+}
+
+//
+//  Mobile
+//  --------------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .filter-options input[type='checkbox'] {
+        .am-checkbox-mixin(@amshopby-choice-element__width__s);
+    }
+}
+
+//
+//  Desktop
+//  --------------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .filter-options input[type='checkbox'] {
+        .am-checkbox-mixin(@amshopby-choice-element__width__m);
+    }
+}

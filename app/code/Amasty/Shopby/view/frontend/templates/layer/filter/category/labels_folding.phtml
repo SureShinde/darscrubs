@@ -1,0 +1,40 @@
+<?php
+/** @var \Amasty\ShopbyBase\Model\FilterSetting $filterSetting */
+/** @var \Amasty\Shopby\Block\Navigation\FilterRenderer $block */
+/** @var \Magento\Framework\Escaper $escaper */
+
+use Amasty\Shopby\Model\Source\SubcategoriesExpand;
+
+$filterUniqId = $escaper->escapeHtml(uniqid());
+$filterCode = $escaper->escapeHtml($filterSetting->getFilterCode());
+?>
+
+<?php if ($filterSetting->isShowSearchBox($filterItems->getCount())): ?>
+    <?= /* @noEscape */ $block->getSearchForm() ?>
+<?php endif; ?>
+
+<form data-amshopby-filter="<?= /* @noEscape */ $filterCode ?>"
+      data-amshopby-filter-request-var="<?= /* @noEscape */ $block->getFilter()->getRequestVar() ?>">
+    <ul class="items am-filter-items-<?= /* @noEscape */ $filterCode ?> am-labels-folding
+    <?= /* @noEscape */ $filterSetting->isMultiselect() ? '-am-multiselect' : '-am-singleselect' ?>"
+        <?php if ($filterSetting->getEnableOverflowScroll() > 0): ?>
+            style="max-height:<?= /* @noEscape */ $filterSetting->getEnableOverflowScroll() ?>px;
+                    overflow-y: auto;
+                    overflow-x: hidden;"
+        <?php endif; ?>>
+        <?= /* @noEscape */ $categoryTreeHtml ?>
+    </ul>
+</form>
+
+<?php if ($filterSetting->getSubcategoriesExpand() == SubcategoriesExpand::BY_CLICK): ?>
+    <script type="text/x-magento-init">
+    {
+        "*": {
+            "amShopbyFilterCollapse": {
+                "mode": "folding",
+                "collapseSelector": "<?= /* @noEscape */ $block->isTopNav() ? '.amasty-catalog-topnav' : '.sidebar' ?>"
+            }
+        }
+    }
+    </script>
+<?php endif; ?>

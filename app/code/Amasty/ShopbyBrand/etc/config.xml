@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright © 2015 Amasty. All rights reserved.
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <amshopby_brand>
+            <general>
+                <product_icon>0</product_icon>
+                <topmenu_enabled>0</topmenu_enabled>
+                <top_links>0</top_links>
+                <menu_item_label>Brands</menu_item_label>
+                <brands_popup_config>
+                    <show_images>0</show_images>
+                    <image_width>100</image_width>
+                    <show_search>1</show_search>
+                    <show_filter>1</show_filter>
+                    <filter_display_all>1</filter_display_all>
+                    <display_zero>1</display_zero>
+                    <show_count>0</show_count>
+                </brands_popup_config>
+                <tooltip_content>{short_description}</tooltip_content>
+            </general>
+            <more_from_brand>
+                <enable>0</enable>
+                <title>More from {brand_name}</title>
+                <count>7</count>
+            </more_from_brand>
+            <product_page>
+                <display_brand_image>0</display_brand_image>
+                <display_description>0</display_description>
+                <width>30</width>
+                <height>30</height>
+            </product_page>
+            <product_listing_settings>
+                <show_on_listing>0</show_on_listing>
+                <listing_brand_logo_width>30</listing_brand_logo_width>
+                <listing_brand_logo_height>30</listing_brand_logo_height>
+            </product_listing_settings>
+        </amshopby_brand>
+    </default>
+</config>

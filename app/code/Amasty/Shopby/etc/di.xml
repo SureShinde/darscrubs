@@ -1,0 +1,370 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Amasty_Shopby:etc/config.xsd">
+    <preference for="Amasty\Shopby\Api\CmsPageRepositoryInterface" type="Amasty\Shopby\Model\Cms\PageRepository"/>
+
+    <virtualType name="Magento\CatalogSearch\Model\ResourceModel\Fulltext\CollectionFactory"
+                 type="Magento\Catalog\Model\ResourceModel\Product\CollectionFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">Amasty\Shopby\Model\ResourceModel\Fulltext\Collection</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="elasticsearchCategoryCollectionFactory"
+                 type="Magento\CatalogSearch\Model\ResourceModel\Fulltext\SearchCollectionFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">Amasty\Shopby\Model\ResourceModel\Fulltext\Collection</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="amElasticsearchCategoryCollectionFactory"
+                 type="Magento\CatalogSearch\Model\ResourceModel\Fulltext\SearchCollectionFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">Amasty\Shopby\Model\ResourceModel\Fulltext\Collection</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="elasticsearchFulltextSearchCollectionFactory" type="Magento\CatalogSearch\Model\ResourceModel\Fulltext\SearchCollectionFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">Amasty\Shopby\Model\ResourceModel\Fulltext\SearchCollection</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="amElasticsearchFulltextSearchCollectionFactory" type="Magento\CatalogSearch\Model\ResourceModel\Fulltext\SearchCollectionFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">Amasty\Shopby\Model\ResourceModel\Fulltext\SearchCollection</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Amasty\Shopby\Model\ResourceModel\Fulltext\SearchCollection"
+                 type="Amasty\Shopby\Model\ResourceModel\Fulltext\Collection">
+        <arguments>
+            <argument name="searchRequestName" xsi:type="string">quick_search_container</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magento\CatalogSearch\Model\ResourceModel\Fulltext\SearchCollectionFactory"
+                 type="Magento\Catalog\Model\ResourceModel\Product\CollectionFactory">
+        <arguments>
+            <argument name="instanceName"
+                      xsi:type="string">Amasty\Shopby\Model\ResourceModel\Fulltext\SearchCollection</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magento\CatalogSearch\Block\SearchResult\ListProduct"
+                 type="Magento\Catalog\Block\Product\ListProduct">
+        <arguments>
+            <argument name="catalogLayer" xsi:type="object">Magento\Catalog\Model\Layer\Search</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Amasty\Shopby\Model\Layer\Cms\Context" type="Magento\Catalog\Model\Layer\Context">
+        <arguments>
+            <argument name="collectionProvider" xsi:type="object">Amasty\Shopby\Model\Layer\Cms\ItemCollectionProvider</argument>
+            <argument name="stateKey" xsi:type="object">Magento\Catalog\Model\Layer\Category\StateKey</argument>
+            <argument name="collectionFilter" xsi:type="object">Magento\Catalog\Model\Layer\Category\CollectionFilter</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Amasty\Shopby\Model\Layer\Cms" type="Magento\Catalog\Model\Layer">
+        <arguments>
+            <argument name="context" xsi:type="object">Amasty\Shopby\Model\Layer\Cms\Context</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Catalog\Model\Layer\Resolver">
+        <arguments>
+            <argument name="layersPool" xsi:type="array">
+                <item name="amshopby_cms" xsi:type="string">Amasty\Shopby\Model\Layer\Cms</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Shopby\Model\Layer\Cms\ItemCollectionProvider">
+        <arguments>
+            <argument name="collectionFactory"
+                      xsi:type="object">Magento\CatalogSearch\Model\ResourceModel\Fulltext\CollectionFactory</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Shopby\Plugin\Elasticsearch\Model\Adapter\AdditionalFieldMapper">
+        <arguments>
+            <argument name="fields" xsi:type="array">
+                <item name="rating_summary" xsi:type="string">integer</item>
+                <item name="stock_status" xsi:type="string">integer</item>
+                <item name="am_is_new" xsi:type="string">integer</item>
+                <item name="product_id" xsi:type="string">product_id</item>
+                <item name="am_on_sale"
+                      xsi:type="object">Amasty\Shopby\Plugin\Elasticsearch\Model\Adapter\FieldMapper\OnSale</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Shopby\Plugin\Elasticsearch\Model\Adapter\AdditionalDataMapper">
+        <arguments>
+            <argument name="dataMappers" xsi:type="array">
+                <item name="rating_summary"
+                      xsi:type="object">Amasty\Shopby\Plugin\Elasticsearch\Model\Adapter\DataMapper\RatingSummary</item>
+                <item name="am_is_new"
+                      xsi:type="object">Amasty\Shopby\Plugin\Elasticsearch\Model\Adapter\DataMapper\IsNew</item>
+                <item name="stock_status"
+                      xsi:type="object">Amasty\Shopby\Plugin\Elasticsearch\Model\Adapter\DataMapper\StockStatus</item>
+                <item name="am_on_sale"
+                      xsi:type="object">Amasty\Shopby\Plugin\Elasticsearch\Model\Adapter\DataMapper\OnSale</item>
+                <item name="product_id"
+                      xsi:type="object">Amasty\Shopby\Plugin\Elasticsearch\Model\Adapter\DataMapper\ProductId</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Shopby\Plugin\Elasticsearch\Model\Adapter\AdditionalBatchDataMapper">
+        <arguments>
+            <argument name="dataMappers" xsi:type="array">
+                <item name="rating_summary"
+                      xsi:type="object">Amasty\Shopby\Plugin\Elasticsearch\Model\Adapter\DataMapper\RatingSummary</item>
+                <item name="am_is_new"
+                      xsi:type="object">Amasty\Shopby\Plugin\Elasticsearch\Model\Adapter\DataMapper\IsNew</item>
+                <item name="stock_status"
+                      xsi:type="object">Amasty\Shopby\Plugin\Elasticsearch\Model\Adapter\DataMapper\StockStatus</item>
+                <item name="am_on_sale"
+                      xsi:type="object">Amasty\Shopby\Plugin\Elasticsearch\Model\Adapter\DataMapper\OnSale</item>
+                <item name="product_id"
+                      xsi:type="object">Amasty\Shopby\Plugin\Elasticsearch\Model\Adapter\DataMapper\ProductId</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Shopby\Plugin\Elasticsearch\SearchAdapter\Aggregation\Builder\Term">
+        <arguments>
+            <argument name="bucketBuilders" xsi:type="array">
+                <item name="rating_summary"
+                      xsi:type="object">Amasty\Shopby\Plugin\Elasticsearch\Model\Adapter\BucketBuilder\RatingSummary</item>
+                <item name="am_is_new"
+                      xsi:type="object">Amasty\Shopby\Plugin\Elasticsearch\Model\Adapter\BucketBuilder\IsNew</item>
+                <item name="am_on_sale"
+                      xsi:type="object">Amasty\Shopby\Plugin\Elasticsearch\Model\Adapter\BucketBuilder\OnSale</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\EntityManager\Operation\ExtensionPool">
+        <arguments>
+            <argument name="extensionActions" xsi:type="array">
+                <item name="Magento\Cms\Api\Data\PageInterface" xsi:type="array">
+                    <item name="create" xsi:type="array">
+                        <item name="amastyCmsPageCreator"
+                              xsi:type="string">Amasty\Shopby\Model\ResourceModel\Cms\Relation\SaveHandler</item>
+                    </item>
+                    <item name="update" xsi:type="array">
+                        <item name="amastyCmsPageUpdater"
+                              xsi:type="string">Amasty\Shopby\Model\ResourceModel\Cms\Relation\SaveHandler</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Cms\Model\Page">
+        <plugin name="Amasty_Shopby::cmsPage" type="\Amasty\Shopby\Plugin\Cms\Model\Page" sortOrder="1"/>
+    </type>
+    <!--Elasticsearch plugins-->
+    <type name="Magento\CatalogSearch\Model\Indexer\Fulltext\Action\DataProvider">
+        <plugin name="Amasty_Shopby::Fulltext_DataProvider"
+                type="Amasty\Shopby\Plugin\CatalogSearch\Model\Indexer\Fulltext\Action\DataProvider"/>
+    </type>
+    <!--======================================================================-->
+    <type name="Magento\Elasticsearch\Model\Adapter\DataMapper\ProductDataMapper">
+        <plugin name="Amasty_Shopby::AdditionalDataMapper"
+                type="Amasty\Shopby\Plugin\Elasticsearch\Model\Adapter\AdditionalDataMapper"/>
+    </type>
+    <type name="Magento\Elasticsearch\Elasticsearch5\Model\Adapter\DataMapper\ProductDataMapper">
+        <plugin name="Amasty_Shopby::AdditionalDataMapper5"
+                type="Amasty\Shopby\Plugin\Elasticsearch\Model\Adapter\AdditionalDataMapper"/>
+    </type>
+    <!--======================================================================-->
+    <type name="Magento\Elasticsearch\Model\Adapter\BatchDataMapper\ProductDataMapper">
+        <plugin name="Amasty_Shopby::AdditionalBatchDataMapper"
+                type="Amasty\Shopby\Plugin\Elasticsearch\Model\Adapter\AdditionalBatchDataMapper"/>
+    </type>
+    <type name="Magento\Elasticsearch\Elasticsearch5\Model\Adapter\DataMapper\ProductDataMapper">
+        <plugin name="Amasty_Shopby::AdditionalBatchDataMapper5"
+                type="Amasty\Shopby\Plugin\Elasticsearch\Model\Adapter\AdditionalBatchDataMapper"/>
+    </type>
+    <!--======================================================================-->
+    <type name="Magento\Elasticsearch\Model\Adapter\FieldMapper\ProductFieldMapper">
+        <plugin name="Amasty_Shopby::AdditionalFieldMapper"
+                type="Amasty\Shopby\Plugin\Elasticsearch\Model\Adapter\AdditionalFieldMapper"/>
+    </type>
+    <type name="Magento\Elasticsearch\Elasticsearch5\Model\Adapter\FieldMapper\ProductFieldMapperProxy">
+        <plugin name="Amasty_Shopby::AdditionalFieldMapper5"
+                type="Amasty\Shopby\Plugin\Elasticsearch\Model\Adapter\AdditionalFieldMapper"/>
+    </type>
+    <!--======================================================================-->
+    <type name="Amasty\ElasticSearch\Model\Indexer\Structure\EntityBuilder\Product">
+        <plugin name="Amasty_Shopby::AdditionalFieldMapper"
+                type="Amasty\Shopby\Plugin\Elasticsearch\Model\Adapter\AdditionalFieldMapper"/>
+    </type>
+    <type name="Amasty\ElasticSearch\Model\Search\GetRequestQuery\GetAggregations\FieldMapper">
+        <plugin name="Amasty_Shopby::AdditionalFieldMapper"
+                type="Amasty\Shopby\Plugin\Elasticsearch\Model\Adapter\AdditionalFieldMapper"/>
+    </type>
+    <type name="Amasty\ElasticSearch\Model\Indexer\Data\Product\ProductDataMapper">
+        <plugin name="Amasty_Shopby::AdditionalBatchDataMapper"
+                type="Amasty\Shopby\Plugin\Elasticsearch\Model\Adapter\AdditionalBatchDataMapper"/>
+    </type>
+    <!--======================================================================-->
+
+    <type name="\Magento\Catalog\Model\ResourceModel\Product\Indexer\Price\DefaultPrice">
+        <plugin name="Amasty_Shopby::PriceRuleIndexerFixer"
+                type="Amasty\Shopby\Plugin\Catalog\Model\ResourceModel\Product\Indexer\Price\DefaultPrice\AddIndexSpecialPrice"/>
+    </type>
+
+    <type name="\Magento\ConfigurableProduct\Model\ResourceModel\Product\Indexer\Price\Configurable">
+        <plugin name="Amasty_Shopby::PriceRuleIndexerFixerConfigurable.2.2.6"
+                type="Amasty\Shopby\Plugin\Catalog\Model\ResourceModel\Product\Indexer\Price\Dimensional\Configurable\AddIndexSpecialPrice"/>
+    </type>
+
+    <!--===================Store Switcher Fix=================================-->
+    <type name="Magento\Directory\Block\Currency">
+        <plugin name="Amasty_Shopby::switch_currency" type="Amasty\Shopby\Plugin\Directory\Currency"/>
+    </type>
+    <type name="Magento\Store\Block\Switcher">
+        <plugin name="Amasty_Shopby::switch_store" type="Amasty\Shopby\Plugin\Store\Switcher\ModifySwitcherPostData" sortOrder="999"/>
+    </type>
+    <type name="Magento\Store\ViewModel\SwitcherUrlProvider">
+        <plugin name="Amasty_Shopby::switch_store" type="Amasty\Shopby\Plugin\Store\ViewModel\SwitcherUrlProvider\ModifyUrlData" sortOrder="998"/>
+    </type>
+    <type name="Magento\UrlRewrite\Model\StoreSwitcher\RewriteUrl">
+        <plugin name="Amasty_Shopby::switch_store_param_fix" type="Amasty\Shopby\Plugin\UrlRewrite\Model\StoreSwitcher\RewriteUrl\ModifySwitchUrl"/>
+    </type>
+    <!--======================================================================-->
+
+    <type name="Amasty\Shopby\Plugin\Framework\App\FrontController">
+        <arguments>
+            <argument name="categoryHelper" xsi:type="object">Amasty\Shopby\Helper\Category\Proxy</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\CatalogSearch\Model\Adapter\Mysql\Aggregation\DataProvider">
+        <plugin name="Amasty_Shopby::stockAndRatingAggregation"
+                type="Amasty\Shopby\Plugin\CatalogSearch\Model\Adapter\Mysql\Aggregation\DataProvider\GetDataSet"/>
+    </type>
+
+    <type name="Magento\CatalogSearch\Model\Search\IndexBuilder">
+        <plugin name="Amasty_Shopby::ApplyCustomFiltersToBaseSearchSelect"
+                type="Amasty\Shopby\Plugin\CatalogSearch\Model\Search\IndexBuilder\ApplyCustomFilters"/>
+    </type>
+
+    <type name="Magento\Framework\Search\Adapter\Mysql\Mapper">
+        <plugin name="Amasty_Shopby::resolve_stock_filter" type="Amasty\Shopby\Plugin\Framework\Search\Adapter\Mysql\MapperPlugin" />
+    </type>
+
+    <type name="Magento\CatalogSearch\Model\Adapter\Mysql\Filter\Preprocessor">
+        <plugin name="Amasty_Shopby::PrepareWhereCauseForCustomFilters"
+                type="Amasty\Shopby\Plugin\CatalogSearch\Model\Adapter\Mysql\Filter\Preprocessor"/>
+    </type>
+
+    <type name="Amasty\Shopby\Model\ResourceModel\Fulltext\Collection">
+        <arguments>
+            <argument name="filterBuilder" xsi:type="object">Magento\Framework\Api\FilterBuilder</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="mysqlSearchResultWrapper" type="Amasty\ShopbyBase\Model\Di\Wrapper">
+        <arguments>
+            <argument name="name" xsi:type="string">Magento\CatalogSearch\Model\ResourceModel\Fulltext\Collection\SearchResultApplierFactory</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Amasty\Shopby\Model\ResourceModel\Fulltext\Collection\SearchResultApplier">
+        <arguments>
+            <argument name="mysqlSearchResultApplierFactory" xsi:type="object">mysqlSearchResultWrapper</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\CatalogSearch\Model\Search\FilterMapper\StockStatusFilter">
+        <plugin name="adapt_stock_status_filter" disabled="true"/>
+        <plugin name="Amasty_Shopby::FixStockStatusFilterSearchQuery"
+                type="Amasty\Shopby\Plugin\CatalogSearch\Model\Search\FilterMapper\StockStatusFilterPlugin"/>
+    </type>
+
+    <type name="Magento\InventoryIndexer\Indexer\Stock\Strategy\Sync">
+        <plugin name="configurable_product_full_index" sortOrder="1"/>
+        <plugin name="configurable_product_index_list" sortOrder="1"/>
+    </type>
+
+    <type name="Magento\InventoryIndexer\Indexer\Stock\Strategy\Sync">
+        <plugin name="grouped_product_index_list" sortOrder="2"/>
+        <plugin name="grouped_product_index_full" sortOrder="2"/>
+    </type>
+
+    <virtualType name="amInventoryStockResolver" type="Amasty\ShopbyBase\Model\Di\Wrapper">
+        <arguments>
+            <argument name="name" xsi:type="string">Magento\InventorySalesApi\Api\StockResolverInterface</argument>
+            <argument name="getShared" xsi:type="boolean">true</argument>
+            <argument name="isProxy" xsi:type="boolean">true</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="amInventoryDefaultStockProvider" type="Amasty\ShopbyBase\Model\Di\Wrapper">
+        <arguments>
+            <argument name="name" xsi:type="string">Magento\InventoryCatalogApi\Api\DefaultStockProviderInterface</argument>
+            <argument name="getShared" xsi:type="boolean">true</argument>
+            <argument name="isProxy" xsi:type="boolean">true</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="amInventoryStockIndexTableNameResolver" type="Amasty\ShopbyBase\Model\Di\Wrapper">
+        <arguments>
+            <argument name="name" xsi:type="string">Magento\InventoryIndexer\Model\StockIndexTableNameResolverInterface</argument>
+            <argument name="isProxy" xsi:type="boolean">true</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Amasty\Shopby\Model\CatalogSearch\Indexer\Fulltext\DataProvider">
+        <arguments>
+            <argument name="stockResolver" xsi:type="object">amInventoryStockResolver</argument>
+            <argument name="defaultStockProvider" xsi:type="object">amInventoryDefaultStockProvider</argument>
+            <argument name="stockIndexTableNameResolver" xsi:type="object">amInventoryStockIndexTableNameResolver</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Shopby\Plugin\CatalogSearch\Model\Search\FilterMapper\StockStatusFilterPlugin">
+        <arguments>
+            <argument name="stockResolver" xsi:type="object">amInventoryStockResolver</argument>
+            <argument name="defaultStockProvider" xsi:type="object">amInventoryDefaultStockProvider</argument>
+            <argument name="stockIndexTableNameResolver" xsi:type="object">amInventoryStockIndexTableNameResolver</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Shopby\Model\Search\DataProvider\Aggregation\CustomFilterPool">
+        <arguments>
+            <argument name="operationPool" xsi:type="array">
+                <item name="stock_status" xsi:type="object">Amasty\Shopby\Model\Search\DataProvider\Aggregation\CustomFilterPool\StockStatus</item>
+                <item name="rating_summary" xsi:type="object">Amasty\Shopby\Model\Search\DataProvider\Aggregation\CustomFilterPool\Rating</item>
+                <item name="am_is_new" xsi:type="object">Amasty\Shopby\Model\Search\DataProvider\Aggregation\CustomFilterPool\IsNew</item>
+                <item name="am_on_sale" xsi:type="object">Amasty\Shopby\Model\Search\DataProvider\Aggregation\CustomFilterPool\OnSale</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Shopby\Model\ResourceModel\Search\FilterMapper\CustomExclusionStrategyPool">
+        <arguments>
+            <argument name="operationPool" xsi:type="array">
+                <item name="rating_summary" xsi:type="object">Amasty\Shopby\Model\ResourceModel\Search\FilterMapper\CustomExclusionStrategy\Rating</item>
+                <item name="am_is_new" xsi:type="object">Amasty\Shopby\Model\ResourceModel\Search\FilterMapper\CustomExclusionStrategy\IsNew</item>
+                <item name="am_on_sale" xsi:type="object">Amasty\Shopby\Model\ResourceModel\Search\FilterMapper\CustomExclusionStrategy\OnSale</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\CatalogSearch\Model\Indexer\Fulltext\Action\DataProvider">
+        <plugin name="Amasty_Shopby::ExcludeOutOfStock"
+                type="Amasty\Shopby\Plugin\CatalogSearch\Model\Indexer\Fulltext\Action\DataProvider\ExcludeOutOfStock"/>
+    </type>
+
+    <type name="Magento\Catalog\Model\ResourceModel\Product\Indexer\Eav\AbstractEav">
+        <plugin name="Amasty_Shopby::ExcludeOutOfStockFromEav"
+                type="Amasty\Shopby\Plugin\Catalog\Model\ResourceModel\Product\Indexer\Eav\AbstractEav\ExcludeOutOfStock"/>
+    </type>
+</config>

@@ -1,0 +1,8 @@
+<?php /** @var \Amasty\GroupedOptions\Block\Adminhtml\Group\Edit\After $block */?>
+<script>
+    require([
+        'Amasty_GroupedOptions/js/group-visual'
+    ], function(Visual) {
+        Visual(<?= /* @noEscape */ $block->getJsonVisualConfig() ?>);
+    });
+</script>

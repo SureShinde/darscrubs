@@ -1,0 +1,20 @@
+<?php
+/**
+ * @var \Amasty\Shopby\Block\Product\ProductList\Ajax $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+if (!$block->canShowBlock()) {
+    return;
+}
+?>
+<script type="text/x-magento-init">
+{
+    "body.cms-index-index": {
+        "amShopbyAjax": {
+                "submitByClick": <?= /* @noEscape */ (int) $block->submitByClick() ?>,
+                "clearUrl": "<?= $escaper->escapeUrl($block->getClearUrl()) ?>",
+                "isCategorySingleSelect": "<?= /* @noEscape */ $block->isCategorySingleSelect() ?>"
+            }
+        }
+}
+</script>

@@ -1,0 +1,17 @@
+<?php
+/**
+ * @var \Amasty\Shopby\Block\Navigation\FilterCollapsing $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+
+<script type="text/x-magento-init">
+    {
+        ".sidebar #narrow-by-list": {
+            "accordion": {
+                "multipleCollapsible": true,
+                "active": [<?= $escaper->escapeHtml(implode(",", $block->getFiltersExpanded()))?>]
+            }
+        }
+    }
+</script>

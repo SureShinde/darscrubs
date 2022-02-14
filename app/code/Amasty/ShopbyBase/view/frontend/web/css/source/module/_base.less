@@ -1,0 +1,48 @@
+//
+//  Shop by Base
+//  ____________________________________________
+
+//
+//  Variables
+//  --------------------------------------------
+
+@base-border__color: #cccccc;
+
+//
+//  Common
+//  --------------------------------------------
+
+& when (@media-common = true) {
+    //Firefox percentage width of flex element bug fix
+    .columns .column.main {
+        max-width: 100%;
+    }
+
+    .icon .brand-label {
+        float: left;
+    }
+
+    .amshopby-morefrom {
+        .products-grid .product-item {
+            width: auto;
+        }
+
+        .product-image-container {
+            min-width: auto;
+        }
+    }
+
+    .ambrands-menu-item.parent .ambrands-link.level-top:after {
+        content: '';
+    }
+}
+
+//
+//  Tablet
+//  --------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .am-brands-fullwidth {
+        width: 100% !important;
+    }
+}

@@ -1,0 +1,15 @@
+<?php
+/** @var $block \Amasty\ShopbyPage\Block\Adminhtml\Page\Selection */
+?>
+<script>
+    require([
+        'Amasty_ShopbyPage/js/selection'
+    ], function (selection) {
+        selection.init(
+            '<?= $block->escapeUrl($block->getSelectionUrl()) ?>',
+            '<?= $block->escapeUrl($block->getAddSelectionUrl())?>',
+            '<?= $block->escapeHtml($block->getCounter())?>'
+        );
+        window.amastyShopbyPageSelection = selection;
+    });
+</script>

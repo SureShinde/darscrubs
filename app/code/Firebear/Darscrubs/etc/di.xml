@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="exe" xsi:type="object">Firebear\Darscrubs\Console\Command\SwatchCommand</item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Firebear\ImportExport\Model\Export\Product" type="Firebear\Darscrubs\Model\Export\Product" />
+    <preference for="Firebear\ImportExport\Setup\EavSetup" type="Firebear\Darscrubs\Setup\EavSetup" />
+    <preference for="Firebear\ImportExport\Model\Import\Attribute" type="Firebear\Darscrubs\Model\Import\Attribute" />
+</config>

@@ -1,0 +1,17 @@
+{
+    "amasty_amshopby_cms_page": {
+        "column": {
+            "entity_id": true,
+            "page_id": true,
+            "enabled": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "review_entity_summary": {
+        "index": {
+            "REVIEW_ENTITY_SUMMARY_ENTITY_PK_VALUE_ENTITY_TYPE_STORE_ID": true
+        }
+    }
+}

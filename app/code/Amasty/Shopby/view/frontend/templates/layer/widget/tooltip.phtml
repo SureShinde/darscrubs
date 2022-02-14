@@ -1,0 +1,18 @@
+<?php
+/** @var \Amasty\Shopby\Block\Navigation\Widget\Tooltip $block */
+/** @var \Magento\Framework\Escaper $escaper */
+
+$content = $block->getContent();
+?>
+<?php if ($content): ?>
+    <script type="text/x-magento-init">
+        {
+            ".am-filter-items-<?= $escaper->escapeHtml($block->getFilterSetting()->getFilterCode()) ?>": {
+                "amShopbyFilterAddTooltip": {
+                    "content": <?= /* @noEscape */ $block->jsonEncode($content) ?>,
+                    "tooltipTemplate": <?= /* @noEscape */ $block->jsonEncode($block->getTooltipTemplate()) ?>
+                }
+            }
+        }
+    </script>
+<?php endif; ?>

@@ -1,0 +1,83 @@
+<?php
+/**
+ * @var \Amasty\Shopby\Block\Navigation\State $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+$filters = $block->getActiveFilters();
+$value = [];
+?>
+
+<?php if (!empty($filters)): ?>
+    <div id="am-shopby-container"
+         class="amshopby-filter-current filter-current"
+         data-am-js="shopby-container"
+         data-mage-init='{"collapsible":{"openedState": "active", "collapsible": true, "active": false }}'>
+        <span class="block-subtitle filter-current-subtitle"
+              role="heading"
+              aria-level="2"
+              data-role="title"
+              data-count="<?= /* @noEscape */ count($filters) ?>">
+            <?= $escaper->escapeHtml(__('Now Shopping by')) ?>
+        </span>
+        <ol class="amshopby-items items">
+            <?php foreach ($filters as $filter): ?>
+                <?php
+                    /** @var \Magento\Catalog\Model\Layer\Filter\Item $filter */
+                    $filterSetting = $block->getFilterSetting($filter->getFilter());
+                    $value = $value ?: $filter->getValue();
+                    $resultValue = $block->getFilterValue($value, $filter);
+                    $clearLinkUrl = $filter->getClearLinkUrl();
+                    $currentFilterName = __('Remove') . " " . __($filter->getName())
+                        . " " . $block->stripTags($filter->getLabel());
+                ?>
+                <li class="item amshopby-item"
+                    data-am-js="shopby-item"
+                    data-container="<?= /* @noEscape */ $filter->getFilter()->getRequestVar() ?>"
+                    data-value="<?= /* @noEscape */ $block->getDataValue($resultValue) ?>">
+                    <?php if ($clearLinkUrl): ?>
+                        <a class="action previous"
+                           href="<?= $escaper->escapeUrl($filter->getRemoveUrl()) ?>"
+                           title="<?= $escaper->escapeHtmlAttr(__('Previous')) ?>">
+                            <span><?= $escaper->escapeHtml(__('Previous')) ?></span>
+                        </a>
+                        <a class="action remove"
+                           title="<?= $escaper->escapeHtmlAttr($filter->getFilter()->getClearLinkText()) ?>"
+                           href="<?= $escaper->escapeUrl($clearLinkUrl) ?>">
+                            <span><?= $escaper->escapeHtml($filter->getFilter()->getClearLinkText()) ?></span>
+                        </a>
+                    <?php else: ?>
+                        <a class="amshopby-remove"
+                           href="<?= $escaper->escapeUrl($filter->getRemoveUrl($resultValue)) ?>"
+                           title="<?= $escaper->escapeHtmlAttr($currentFilterName) ?>">
+                        </a>
+                    <?php endif; ?>
+                    <span class="amshopby-filter-name">
+                        <?= $escaper->escapeHtml(__($filter->getName())) ?>
+                    </span>
+                    <div class="amshopby-filter-value">
+                        <?= /* @noEscape */ $block->viewLabel($filter) ?>
+                    </div>
+                </li>
+
+                <?php $value = $block->changeValueForMultiselect($filter->getFilter(), $value) ?>
+            <?php endforeach; ?>
+            <li class="amshopby-button-wrap">
+                <?php if ($block->getUnfoldedCount() && $block->getUnfoldedCount() < count($filters)): ?>
+                    <?= /* @noEscape */ $block->createShowMoreButtonBlock() ?>
+                <?php endif; ?>
+            </li>
+        </ol>
+
+        <script type="text/x-magento-init">
+            {
+                "[data-am-js='shopby-container']": {
+                    "amShopbyFilterContainer": {
+                            "collectFilters": <?= /* @noEscape */ $block->collectFilters() ?>,
+                            "numberOfUnfoldedOptions": <?= $escaper->escapeHtml($block->getUnfoldedCount()) ?>
+                       }
+                }
+            }
+        </script>
+    </div>
+<?php endif; ?>

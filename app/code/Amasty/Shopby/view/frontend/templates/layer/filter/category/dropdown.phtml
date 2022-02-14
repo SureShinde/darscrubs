@@ -1,0 +1,52 @@
+<?php
+/** @var \Amasty\ShopbyBase\Model\FilterSetting $filterSetting */
+/** @var \Amasty\Shopby\Block\Navigation\FilterRenderer $block */
+/** @var \Amasty\Shopby\Model\Layer\Filter\CategoryItems $filterItems */
+/** @var \Amasty\Shopby\Model\Layer\Filter\Item $filterItem */
+/** @var \Magento\Framework\Escaper $escaper */
+
+$filterUniqId = uniqid();
+$filterCode = $escaper->escapeHtml($filterSetting->getFilterCode());
+?>
+
+<div class="am-category-wrapper amshopby-dropdown-<?= /* @noEscape */ $filterUniqId ?>"
+     data-amshopby-js="category-dropdown-<?= /* @noEscape */ $filterUniqId ?>"
+>
+    <div class="amshopby-category-dropdown" data-amshopby-js="category-dropdown">
+        <?php foreach ($filterItems->getAllItems() as $filterItem): ?>
+            <?php if ($block->checkedFilter($filterItem)): ?>
+                <div class="am-multiselect-crumb">
+                    <?= $escaper->escapeHtml($filterItem->getOptionLabel()) ?>
+                    <button data-remove-url="<?= $escaper->escapeUrl($filterItem->getUrl()) ?>"
+                            class="am-category-remove action-close"
+                            data-mage-init='{"amShopbyFilterCategoryDropdown":{}}'
+                            type="button"
+                            aria-label="<?= $escaper->escapeHtmlAttr(__('Remove')) ?>"
+                            title="<?= $escaper->escapeHtmlAttr(__('Remove')) ?>"></button>
+                </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </div>
+    <form data-amshopby-filter="<?= /* @noEscape */ $filterCode ?>"
+          data-amshopby-filter-request-var="<?= /* @noEscape */ $block->getFilter()->getRequestVar() ?>">
+        <ol data-amshopby-js="filter-items-<?= /* @noEscape */ $filterCode ?>"
+            class="items am-filter-items-<?= /* @noEscape */ $filterCode ?> am-category-view
+        <?= /* @noEscape */ $filterSetting->isMultiselect() ? '-am-multiselect' : '-am-singleselect' ?>">
+            <?= /* @noEscape */ $categoryTreeHtml ?>
+        </ol>
+    </form>
+</div>
+
+<script type="text/x-magento-init">
+{
+    "*": {
+        "amShopbyFilterCollapse": {
+            "mode": "dropdown",
+            "collapseSelector": "<?= /* @noEscape */ $block->isTopNav() ? '.amasty-catalog-topnav' : '.sidebar' ?>",
+            "currentCategoryId": "<?= /* @noEscape */ (int) $block->getCurrentCategoryId() ?>",
+            "filterUniqId": "<?= /* @noEscape */ $filterUniqId ?>",
+            "filterCode": "<?= /* @noEscape */ $filterCode ?>"
+        }
+    }
+}
+</script>

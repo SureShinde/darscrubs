@@ -1,0 +1,102 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="emizentech" sortOrder="999" translate="label">
+			<label>EmizenTech</label>
+		</tab>
+		<section id="relealup" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="10" translate="label">
+			<label>RevealUP</label>
+			<tab>emizentech</tab>
+			<resource>Emizentech_RevelupWebHook::config_emizentech_revelup</resource>
+			<group id="genetal" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="10" translate="label">
+				<label>General</label>
+				<field id="api_endpoint" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="10" translate="label" type="text">
+					<label>API EndPoint URL</label>
+					<comment/>
+				</field>
+				<field id="api_key" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="20" translate="label" type="text">
+					<label>API key</label>
+					<comment/>
+				</field>
+				<field id="api_password" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="30" translate="label" type="text">
+					<label>API Password</label>
+					<comment/>
+				</field>
+				<field id="product_sync_enabled" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="40" translate="label" type="select">
+					<label>Sync Products</label>
+					<comment/>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="limit" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="50" translate="label" type="text">
+					<label>Product Process Limit</label>
+					<comment/>
+				</field>
+				<field id="offset" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="60" translate="label" type="text">
+					<label>Product Offset</label>
+					<comment/>
+				</field>
+				<field id="customer_sync_enabled" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="70" translate="label" type="select">
+					<label>Sync Customers</label>
+					<comment/>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="customer_limit" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="80" translate="label" type="text">
+					<label>Customer Process Limit</label>
+					<comment/>
+				</field>
+				<field id="customer_offset" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="90" translate="label" type="text">
+					<label>Customer Offset</label>
+					<comment/>
+				</field>
+				<field id="order_sync_enabled" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="100" translate="label" type="select">
+					<label>Sync Orders</label>
+					<comment/>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="order_limit" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="110" translate="label" type="text">
+					<label>Order Process Limit</label>
+					<comment/>
+				</field>
+				<field id="order_offset" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="120" translate="label" type="text">
+					<label>Order Offset</label>
+					<comment/>
+				</field>
+				<field id="customer_website" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="130" translate="label" type="select">
+					<label>Assign customer to website</label>
+					<comment/>
+					<source_model>Magento\Config\Model\Config\Source\Website</source_model>
+				</field>
+				<field id="customer_group" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="140" translate="label" type="select">
+					<label>Assign customer to Group</label>
+					<comment/>
+					<source_model>Magento\Customer\Model\Customer\Attribute\Source\Group</source_model>
+				</field>
+			</group>
+		</section>
+		<section id="dearsystems" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="10" translate="label">
+			<label>Dear Systems</label>
+			<tab>emizentech</tab>
+			<resource>Emizentech_RevelupWebHook::config_emizentech_dearsystems</resource>
+			<group id="genetal" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="10" translate="label">
+				<label>General</label>
+				<field id="enabled" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="10" translate="label" type="select">
+					<label>Module Status</label>
+					<comment/>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="api_endpoint" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="20" translate="label" type="text">
+					<label>API EndPoint URL</label>
+					<comment/>
+				</field>
+				<field id="api_auth_accountid" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="30" translate="label" type="text">
+					<label>api-auth-accountid</label>
+					<comment/>
+				</field>
+				<field id="api_auth_applicationkey" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="40" translate="label" type="text">
+					<label>api-auth-applicationkey</label>
+					<comment/>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

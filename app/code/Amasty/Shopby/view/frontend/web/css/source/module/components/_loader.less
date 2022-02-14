@@ -1,0 +1,60 @@
+//
+//  Loader styles
+//  __________________________________________________
+
+//
+//  Variables
+//  --------------------------------------------------
+
+@amshopby-loader__background-image: @amshopby-loader__url;
+@amshopby-loader__size: 100px;
+
+//
+//  Common
+//  --------------------------------------------------
+
+& when (@media-common = true) {
+    #amasty-shopby-product-list {
+        & {
+            z-index: 1;
+        }
+
+        .products.wrapper {
+            position: relative;
+        }
+    }
+
+    .amshopby-overlay-block {
+        & {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            z-index: 230;
+            display: none;
+            width: 100%;
+            background: rgba(255, 255, 255, .5);
+        }
+
+        > .amshopby-loader {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            display: block;
+            width: @amshopby-loader__size;
+            height: @amshopby-loader__size;
+            background: @amshopby-loader__background-image center/@amshopby-loader__size no-repeat;
+            transform: translate(-50%, -10%);
+        }
+    }
+}
+
+//
+//  Tablet
+//  --------------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    #amasty-shopby-product-list .amshopby-overlay-block > .amshopby-loader {
+        top: 30%;
+        transform: translate(-50%, -30%);
+    }
+}

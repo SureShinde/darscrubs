@@ -1,0 +1,13 @@
+<?php
+/** @var \Amasty\Shopby\Block\Navigation\UrlModifier $block */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+
+<?php if ($block->replaceUrl()): ?>
+    <script>
+        window.history.replaceState({url: '<?= $escaper->escapeUrl($block->getCurrentUrl()) ?>'},
+            '',
+            '<?= $escaper->escapeUrl($block->getCurrentUrl()) ?>'
+        );
+    </script>
+<?php endif;?>

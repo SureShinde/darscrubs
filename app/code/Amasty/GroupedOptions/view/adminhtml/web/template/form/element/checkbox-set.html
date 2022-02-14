@@ -1,0 +1,69 @@
+<fieldset class="admin__field"
+     visible="visible"
+     css="$data.additionalClasses"
+     attr="'data-config-scope': $data.scopeLabel, 'data-index': index">
+    <legend class="admin__field-label" if="$data.label" attr="for: uid">
+        <span text="label"/>
+    </legend>
+
+    <div class="admin__field-control amgrouped-checkbox-set"
+         css="'_with-tooltip': $data.tooltip"
+    >
+        <div class="admin__field admin__field-option amgrouped-item">
+            <span data-bind="text: 'Select options for this attribute group'"></span>
+        </div>
+        <!-- ko foreach: options -->
+            <!-- ko if: id && value -->
+                <div class="admin__field admin__field-option amgrouped-item">
+                    <input
+                        ko-checked="$parent.value"
+                        ko-disabled="$parent.disabled"
+                        css=" 'admin__control-radio': !$parent.multiple, 'admin__control-checkbox': $parent.multiple"
+                        attr=" id: ++ko.uid, value: value, type: $parent.multiple ? 'checkbox' : 'radio'"
+                    />
+
+                    <label class="admin__field-label" text="label" attr="for: ko.uid"/>
+
+                    <span class="amgrouped-swatch"
+                          if="swatch"
+                          data-bind="style: {'background': swatch, 'background-size': 'cover'}"></span>
+                </div>
+            <!-- /ko -->
+        <!-- /ko -->
+
+        <!-- ko if: $data.optionType() == "price" -->
+            <div class="admin__field amgrouped-item -price">
+                <!-- ko foreach: { data: $data.range}  -->
+                    <div class="amgrouped-input-wrap">
+                        <label class="amgrouped-label"
+                               data-bind="attr: {for: ++ko.uid}, text: label"></label>
+                        <input class="amgrouped-input admin__control-text"
+                               type="text"
+                               data-bind="
+                                    event: {change: $parent.setRangeValue.bind($data, $index())},
+                                    value: $parent.attributeValues()[$index()],
+                                    valueUpdate: $parent.valueUpdate,
+                                    attr: {
+                                        name: 'range' + '[]',
+                                        placeholder: $parent.placeholder,
+                                        id: ko.uid,
+                                        disabled: $parent.disabled,
+                                        maxlength: 255
+                                    }"
+                        />
+                    </div>
+                <!-- /ko -->
+            </div>
+        <!-- /ko -->
+
+        <label class="admin__field-error" if="error" attr="for: uid" text="error"/>
+
+        <div class="admin__field-note" if="$data.notice" attr="id: noticeId">
+            <span html="notice"/>
+        </div>
+
+        <div class="admin__additional-info" if="$data.additionalInfo" html="$data.additionalInfo"></div>
+
+        <render args="$data.service.template" if="$data.hasService()"/>
+    </div>
+</fieldset>

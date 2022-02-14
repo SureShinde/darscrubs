@@ -1,0 +1,95 @@
+//
+//  Ui Tooltip styles
+//  _____________________________________
+
+//
+//  Common
+//  -------------------------------------
+
+& when (@media-common = true) {
+    .ui-tooltip {
+        &.ui-widget {
+            padding: 5px 10px;
+            max-width: 250px;
+            border: 1px solid @base-border__color;
+            background: #fff;
+            box-shadow: 1px 0 3px @base-border__color;
+            word-wrap: break-word;
+        }
+
+        .arrow {
+            & {
+                position: absolute;
+                bottom: -15px;
+                width: 20px;
+                height: 15px;
+            }
+
+            &:after {
+                position: absolute;
+                border-top: 10px solid @base-border__color;
+                content: '';
+            }
+
+            &:before {
+                position: absolute;
+                top: -1px;
+                z-index: 9;
+                border-top: 9px solid #fff;
+                content: '';
+            }
+        }
+
+        .arrow.top {
+            top: -15px;
+            transform: scale(1, -1);
+        }
+
+        .arrow.left {
+            & {
+                left: 15px;
+            }
+
+            &:before {
+                left: 1px;
+                border-right: 19px solid transparent;
+            }
+
+            &:after {
+                border-right: 20px solid transparent;
+            }
+        }
+
+        .arrow.right {
+            & {
+                right: 15px;
+            }
+
+            &:before {
+                right: 1px;
+                border-left: 19px solid transparent;
+            }
+
+            &:after {
+                border-left: 20px solid transparent;
+            }
+        }
+
+        .am-brand-small_image {
+            display: block;
+            margin: auto;
+            max-width: 150px;
+        }
+
+        .am-brand-image {
+            display: block;
+            margin: auto;
+            max-width: 400px;
+        }
+
+        // Fix for Porto theme
+        .ui-tooltip-content h3 {
+            margin: 5px 0;
+        }
+    }
+}

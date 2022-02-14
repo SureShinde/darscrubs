@@ -1,0 +1,17 @@
+<?php
+/** @var \Amasty\Shopby\Block\Navigation\JsInit $block */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+
+<div data-am-js="js-init">
+    <script type="text/x-magento-init">
+        {
+            "[data-am-js='filter-item-default']": {
+                "amShopbyFilterItemDefault": {
+                    "collectFilters": <?= /* @noEscape */ $block->collectFilters() ?>,
+                    "clearUrl": "<?= $escaper->escapeUrl($block->getClearUrl()) ?>"
+                }
+            }
+        }
+    </script>
+</div>

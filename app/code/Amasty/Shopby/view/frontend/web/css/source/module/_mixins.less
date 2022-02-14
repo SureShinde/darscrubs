@@ -1,0 +1,139 @@
+//
+//  Mixins
+//  ____________________________________________
+
+.transition(@del: .3) {
+    transition: ~'@{del}s all ease-in';
+}
+
+.am-flex(
+    @horiz-pos: none,
+    @vert-pos: none,
+    @wrap: none,
+    @inline: none
+) {
+
+    & when (@inline = none) {
+        display: flex;
+    }
+
+    & when not (@inline = none) {
+        display: @inline;
+    }
+
+    & when not (@horiz-pos = none) {
+        justify-content: @horiz-pos;
+    }
+
+    & when not (@vert-pos = none) {
+        align-items: @vert-pos;
+    }
+
+    & when not (@wrap = none) {
+        flex-wrap: @wrap;
+    }
+}
+
+.amshopby-tooltip-mixin(
+    @background-color: #fff,
+    @border-color: #a0a0a0,
+    @text-color: #000
+) {
+    & {
+        position: absolute;
+        bottom: ~'calc(100% + 7px)';
+        left: 8px;
+        z-index: 1;
+        display: block;
+        box-sizing: border-box;
+        padding: 3px;
+        border: 1px solid @border-color;
+        border-radius: 2px;
+        background: @background-color;
+        color: @text-color;
+        letter-spacing: .03em;
+        font-size: 12px;
+        line-height: 1;
+        transform: translateX(-50%);
+    }
+
+    &:before,
+    &:after {
+        position: absolute;
+        top: ~'calc(100% - 2px)';
+        left: ~'calc(50% - 3px)';
+        display: block;
+        width: 6px;
+        height: 6px;
+        border-bottom-right-radius: 2px;
+        background: @border-color;
+        content: '';
+        transform: rotate(45deg);
+        clip-path: polygon(100% 0%, 0% 100%, 100% 100%);
+    }
+
+    &:after {
+        top: ~'calc(100% - 3px)';
+        background: @background-color;
+    }
+}
+
+.am-visually-hidden {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    margin: 0;
+    padding: 0;
+    width: 0;
+    height: 0;
+    border: 0;
+    opacity: 0;
+}
+
+.am-word-break {
+    & {
+        word-wrap: break-word;
+        word-break: break-word;
+    }
+
+    .ie11 & {
+        word-break: break-all;
+    }
+}
+
+.amshopby-button-mixin(@color: @amshopby__primary__color) {
+    & {
+        &:extend(.action.primary all);
+        .am-word-break;
+
+        min-height: 40px;
+        border-radius: 3px;
+        background: @color;
+        color: #fff;
+        text-align: center;
+        letter-spacing: -.015em;
+        font-size: 16px;
+        line-height: 22px;
+        transition: background .2s ease-in-out, border-color .2s ease-in-out;
+    }
+
+    &:not(.primary) {
+        border-radius: 3px;
+    }
+
+    &:not(.primary),
+    &:not(.primary):active {
+        box-shadow: none;
+    }
+
+    &:hover {
+        border-color: lighten(@color, 13%);
+        background: lighten(@color, 13%);
+    }
+
+    &:active,
+    &:focus {
+        border-color: darken(@color, 10%);
+        background: darken(@color, 10%);
+    }
+}

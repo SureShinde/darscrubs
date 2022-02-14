@@ -1,0 +1,49 @@
+"You deleted the group.","You deleted the group."
+"We can't find a group to delete.","We can't find a group to delete."
+"This group no longer exists.","This group no longer exists."
+"Manage Grouped Options","Manage Grouped Options"
+"Edit Group","Edit Group"
+"New Group","New Group"
+"Please correct the data sent.","Please correct the data sent."
+"Something went wrong while saving the group.","Something went wrong while saving the group."
+"A total of %1 record(s) have been deleted.","A total of %1 record(s) have been deleted."
+"This group code already exists.","This group code already exists."
+"You saved the group.","You saved the group."
+"Requested group doesn't exist","Requested group doesn't exist"
+"Requested attribute group doesn't exist","Requested attribute group doesn't exist"
+"Invalid method %1::%2","Invalid method %1::%2"
+Inactive,Inactive
+Active,Active
+Delete,Delete
+"Are you sure you want to delete this group?","Are you sure you want to delete this group?"
+Reset,Reset
+"Save and Continue Edit","Save and Continue Edit"
+Save,Save
+Edit,Edit
+"Delete ""${ $.$data.name }""","Delete ""${ $.$data.name }"""
+"Are you sure you wan't to delete a ""${ $.$data.name }"" record?","Are you sure you wan't to delete a ""${ $.$data.name }"" record?"
+Selected,Selected
+"Select options for this attribute group","Select options for this attribute group"
+Search,Search
+"Sort Option","Sort Option"
+"Choose a color","Choose a color"
+"Upload a file","Upload a file"
+Clear,Clear
+From,From
+To,To
+Back,Back
+General,General
+Status,Status
+"Group Title","Group Title"
+"Group Code","Group Code"
+Swatch,Swatch
+Alias,Alias
+Position,Position
+Attribute,Attribute
+"Attribute Options","Attribute Options"
+"Add New Group","Add New Group"
+"Delete items","Delete items"
+"Are you sure you wan't to delete selected items?","Are you sure you wan't to delete selected items?"
+ID,ID
+Title,Title
+Options,Options

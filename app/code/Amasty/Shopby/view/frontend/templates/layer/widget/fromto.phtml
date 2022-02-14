@@ -1,0 +1,83 @@
+<?php
+/**
+ * @var \Amasty\ShopbyBase\Model\FilterSetting $filterSetting
+ * @var \Amasty\Shopby\Block\Navigation\Widget\FromTo $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+$postfix = '_' . uniqid();
+$filterCode = $escaper->escapeHtml($filterSetting->getFilterCode());
+$min = $escaper->escapeHtml($fromToConfig['min']);
+$max = $escaper->escapeHtml($fromToConfig['max']);
+$from = $fromToConfig['from'];
+$to = $fromToConfig['to'];
+$step = $fromToConfig['step'];
+$fromToType = $block->getWidgetType();
+?>
+
+<div id="am-filter-widget-<?= /* @noEscape */ $filterCode . $postfix ?>"
+     class="amshopby-fromto-wrap am-filter-items-<?= /* @noEscape */ $filterCode ?>"
+     data-am-js="fromto-widget">
+    <form
+        data-amshopby-filter="<?= /* @noEscape */ $filterCode ?>"
+        data-amshopby-filter-request-var="<?= /* @noEscape */ $block->getFilter()->getRequestVar() ?>">
+        <input
+            <?php if ($from && $to): ?>
+                value="<?= /* @noEscape */ sprintf("%.2F-%.2F", $from, $to) ?>"
+            <?php endif; ?>
+            type="hidden"
+            data-amshopby-fromto="value"
+            name="amshopby[<?= $escaper->escapeHtml($block->getFilter()->getRequestVar()) ?>][]"/>
+        <div class="range am-fromto-widget amshopby_currency_rate"
+             data-rate="<?= /* @noEscape */ $fromToConfig['curRate'] ?>">
+            <div class="amshopby-input-wrapper">
+                <input class="am-filter-price -from input-text"
+                       data-amshopby-fromto="from"
+                       data-validate-data="{'validate-number':true}"
+                       type="number"
+                       placeholder="<?= $escaper->escapeHtmlAttr(__('From')) ?>"
+                />
+                <span class="amshopby-currency"><?= $escaper->escapeHtml($fromToConfig['currencySymbol']) ?></span>
+            </div>
+            <span class="delimiter">-</span>
+            <div class="amshopby-input-wrapper">
+                <input class="am-filter-price -to input-text"
+                       data-amshopby-fromto="to"
+                       data-validate-data="{'validate-number':true}"
+                       type="number"
+                       placeholder="<?= $escaper->escapeHtmlAttr(__('To')) ?>"
+                />
+            </div>
+            <?php if (!$block->collectFilters()): ?>
+                <button class="am-filter-go"
+                        title="<?= $escaper->escapeHtmlAttr(__('Apply filter')) ?>"
+                        data-amshopby-fromto="go">
+                    <?= $escaper->escapeHtml(__('Apply')) ?>
+                </button>
+            <?php endif; ?>
+        </div>
+    </form>
+</div>
+
+<script type="text/x-magento-init">
+{
+    "#am-filter-widget-<?= /* @noEscape */ $filterCode . $postfix;?>": {
+        "amShopbyFilterFromTo": {
+                "enabled": <?= /* @noEscape */ ($filterSetting->getAddFromToWidget() ? '1' : '0') ?>,
+                "collectFilters": <?= /* @noEscape */ $block->collectFilters() ?>,
+                "from":"<?= /* @noEscape */ $from ?>",
+                "to":"<?= /* @noEscape */ $to ?>",
+                "min":"<?= /* @noEscape */ $min ?>",
+                "max":"<?= /* @noEscape */ $max ?>",
+                "deltaFrom": "<?= /* @noEscape */ $fromToConfig['deltaFrom'] ?>",
+                "deltaTo": "<?= /* @noEscape */ $fromToConfig['deltaTo'] ?>",
+                "curRate": "<?= /* @noEscape */ $fromToConfig['curRate'] ?>",
+                "code":"<?= $escaper->escapeHtml($filterSetting->getAttributeModel()->getAttributeCode()) ?>",
+                "isSlider": <?= /* @noEscape */ ($fromToType == 'slider' ? '1' : '0') ?>,
+                "isDropdown": <?= /* @noEscape */ ($fromToType == 'dropdown' ? '1' : '0') ?>,
+                "url": "<?= /* @noEscape */ $block->getSliderUrlTemplate() ?>",
+                "step":<?= /* @noEscape */ ($fromToType == 'slider' ? $escaper->escapeHtml((float)($step)) : '0') ?>
+        }
+    }
+}
+</script>

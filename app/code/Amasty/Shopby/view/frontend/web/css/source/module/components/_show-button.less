@@ -1,0 +1,152 @@
+//
+//  Show button styles
+//  __________________________________________________
+
+//
+//  Imports
+//  --------------------------------------------------
+
+@import '../_mixins';
+
+//
+//  Variables
+//  --------------------------------------------------
+
+@apply-show-button__border-color: @amshopby-base__border-color;
+@apply-show-button__background: #fff;
+@apply-show-button__bottom__s: -80px;
+@apply-show-button-angle__size: 10px;
+@apply-show-button-loader__size: 30px;
+
+//
+//  Common
+//  --------------------------------------------------
+
+& when (@media-common = true) {
+    .am_shopby_apply_filters {
+        & {
+            position: fixed;
+            bottom: @apply-show-button__bottom__s;
+            z-index: 999;
+            width: 100%;
+            transition: left .2s ease-in-out;
+        }
+
+        &.visible {
+            bottom: 0;
+        }
+    }
+
+    .am-show-button {
+        & {
+            z-index: 211;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            margin: 0 auto;
+            padding: 15px 0;
+            width: 100%;
+            border-top: 1px solid @apply-show-button__border-color;
+            background: @apply-show-button__background;
+            text-align: center;
+        }
+
+        > .am-items {
+            margin: 0;
+            padding: 0 10px;
+            color: #070605;
+            font-size: 14px;
+            line-height: 22px;
+        }
+
+        > .am-items.-loading {
+            display: inline-block;
+            width: @apply-show-button-loader__size;
+            height: @apply-show-button-loader__size;
+            background: @amshopby-loader__url center/@apply-show-button-loader__size no-repeat;
+            vertical-align: middle;
+        }
+
+        > .amshopby-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 10px;
+            min-width: 90px;
+            line-height: 1;
+        }
+
+        .ie11 & > .amshopby-button {
+            padding: 10px;
+        }
+    }
+}
+
+//
+//  Tablet
+//  --------------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .am_shopby_apply_filters {
+        & {
+            position: absolute;
+            bottom: inherit;
+            z-index: 212;
+            display: none;
+            visibility: hidden;
+            padding: 0;
+            width: inherit;
+        }
+
+        &.visible {
+            bottom: inherit;
+            visibility: visible;
+        }
+
+        &.-fixed {
+            position: fixed;
+        }
+
+        &.-fixed .am-show-button:before {
+            display: none;
+        }
+    }
+
+    .am-show-button {
+        & {
+            position: relative;
+            justify-content: space-between;
+            margin: 0 0 10px;
+            padding: 12px 10px;
+            min-width: 180px;
+            width: inherit;
+            border: none;
+            border-radius: 6px;
+            box-shadow: 0 4px 8px rgba(190, 199, 219, .21), 0 6px 25px rgba(190, 199, 219, .28);
+        }
+
+        > .am-items {
+            margin: 0 auto;
+        }
+
+        &:before {
+            position: absolute;
+            width: @apply-show-button-angle__size;
+            height: @apply-show-button-angle__size;
+            background: @apply-show-button__background;
+            content: '';
+            transform: rotate(45deg);
+        }
+
+        &.-vertical:before {
+            top: ~'calc(50% - (@{apply-show-button-angle__size} / 2))';
+            right: ~'calc(100% - (@{apply-show-button-angle__size} / 2))';
+        }
+
+        &.-horizontal:before {
+            top: ~'calc(100% - (@{apply-show-button-angle__size} / 2))';
+            left: ~'calc(50% - (@{apply-show-button-angle__size} / 2))';
+        }
+    }
+}

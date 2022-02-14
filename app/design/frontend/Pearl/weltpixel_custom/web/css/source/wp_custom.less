@@ -1,0 +1,172 @@
+// Custom less for extending Pearl/weltpixel theme can be added in this file in the new theme
+// Here custom less for clients can be added
+.weltpixellighting {
+	color: black;
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .pagebuilder-mobile-only {
+        display: none !important;
+    }
+}
+
+.page-wrapper {
+    .page-header{
+        .block-search{
+            .action {
+                &.search {
+                    &:before {
+                        color:#CCCCCC!important;
+                    }
+                } 
+            }
+        }
+        .minicart-wrapper{ 
+            .action {
+                &.showcart {
+                    &:before {
+                        color:#CCCCCC!important;
+                    }
+                }
+            } 
+        }
+    }
+    .sticky-header {
+        .page-header{
+            .block-search{
+                .action {
+                    &.search {
+                        &:before {
+                            color:#000000!important;
+                        }
+                    } 
+                }
+            }
+            .minicart-wrapper{ 
+                .action {
+                    &.showcart {
+                        &:before {
+                            color:#000000!important;
+                        }
+                    }
+                } 
+            }
+        }
+    }
+}
+
+.navigation{
+    .level-top-sectioned {
+        .mm-image-wrp {
+            img {
+                height:100px
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__s) {
+    .products-grid {
+        .product-item-info {
+            &:not(:hover) {
+                &:not(.active) {
+                    .swatch-attribute {
+                        &:extend(.abs-visually-hidden-desktop-s all);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.theme-pearl.catalog-product-view {
+    .product-options-bottom {
+        .box-tocart {
+            .fieldset {
+                display: flex;
+                flex-direction: column;
+                .actions-bottom {
+                    button {
+                        width: 100%;
+                        border-radius: 25px;
+                        -moz-border-radius: 25px;
+                        -webkit-border-radius: 25px;
+                    }
+                }
+            }
+        }
+    }
+    .product-info-main .product-add-form {
+        #product-options-wrapper {
+            .swatch-opt {
+                border-top:1px solid #E5E5E5;
+
+                .swatch-attribute {
+                    padding:10px 0;
+                    margin:0;
+                    border-bottom: 1px solid #E5E5E5;
+                    &.color {
+                        .swatch-option {
+                            width: 18px !important;
+                            height: 18px !important;
+                            min-width: 18px !important;
+                            &:before {
+                                width: 28px;
+                                height: 28px;
+                                top:-5px;
+                                left: -5px;
+                            }
+                            &:after {
+                                width: 24px;
+                                height: 24px;
+                            }
+                            &:focus {
+                                box-shadow: 0 0 0px 0px #00699d;
+                            }
+                        }
+                    }
+                    &.size {
+                        .swatch-option {
+                            width: 38px;
+                            height: 38px;
+                            background-color: #F6F6F6;
+                            color:#555;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            font-weight: bold;
+                            border-radius: 0px;
+                            -moz-border-radius: 0px;
+                            -webkit-border-radius: 0;
+                            &:focus {
+                                box-shadow: 0 0 0px 0px #00699d;
+                            }
+                            &:before {
+                                border-radius: 0px !important;
+                                -moz-border-radius: 0px !important;
+                                -webkit-border-radius: 0 !important;
+                            }
+                            &.selected {
+                                background-color: #A7A7A7 !important;
+                                color: #fff;
+                                font-weight: bold;
+                                &:before {
+                                    border:none !important;
+                                }
+                            }
+                            &.disabled {
+                                text-decoration: line-through;
+                                font-weight: normal;
+                                &:after {
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+}
+
